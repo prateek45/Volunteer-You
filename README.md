@@ -28,3 +28,9 @@ To Install python dependencies in requirements.txt execute:
 
  Go to the url shown + /admin and add the details
 
+## In Regards to SQL Integration
+
+The main feature of this branch is that instead of being configured to a local sqlite server,
+the application is linked to the UQZone MySQL database. As such, for now at least, we keep this
+branch seperate from main as a deployment branch, only merging into this when wanting to test 
+functionality against remote hosting. For local testing/dev, other branches should be used.
