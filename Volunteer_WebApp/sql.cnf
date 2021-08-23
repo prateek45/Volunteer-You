@@ -1,0 +1,5 @@
+[client]
+database = proj_database
+user = root
+password = de3f7ec64a17539c22b5f8fa
+default-character-set = utf8
