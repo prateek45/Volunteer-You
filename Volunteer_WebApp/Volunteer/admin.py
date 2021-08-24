@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(Volunteer)
 admin.site.register(Organization_Official)
+admin.site.register(Events)
