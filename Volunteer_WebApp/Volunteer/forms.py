@@ -27,3 +27,8 @@ class CreateUser(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name','last_name','username', 'email', 'password1','password2']
+
+class CreateEvent(ModelForm):
+    class Meta:
+        model = Events
+        fields = '__all__'
