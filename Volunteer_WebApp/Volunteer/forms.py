@@ -32,3 +32,4 @@ class CreateEvent(ModelForm):
     class Meta:
         model = Events
         fields = '__all__'
+        exclude = ['roster', 'photo']

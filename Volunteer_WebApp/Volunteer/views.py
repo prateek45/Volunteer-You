@@ -76,3 +76,27 @@ def login_page(request):
 def logout_page(request):
     logout(request)
     return redirect('login')
+
+@login_required(login_url = 'login')
+def event_create(request):
+    form = CreateEvent()
+    if request.method == 'POST':
+        form = EventCreate(request.POST)
+        if form.is_valid:
+            event = form.save()
+            #If user is an organization, create an event
+            if request.user.groups.filter(name = 'Organization'):
+                Events.objects.create(
+                    organization = request.user.groups.name,
+                    title = event.title,
+                    description = event.description,
+                    slots = event.slots,
+                    roster = "",
+                    contact = event.contact,
+                    location = event.location
+                )
+                return redirect('Organization')
+            else:
+                messages.info("You do not have permission for this functionality.")
+    context = {}
+    return render(request, '', context)
