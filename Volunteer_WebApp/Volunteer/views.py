@@ -6,7 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group,User
 from django.contrib import messages
 
-from .models import Organization_Official, Volunteer
+from rest_framework import viewsets
+from .serializers import VolunteerSerializer, OrganizationSerializer, EventsSerializer
+
+from .models import Organization_Official, Volunteer, Events
 from .forms import CreateUser
 from .decorators import allowed_users, unauthenticated_user
 
@@ -100,3 +103,15 @@ def event_create(request):
                 messages.info("You do not have permission for this functionality.")
     context = {}
     return render(request, '', context)
+
+class VolunteerView(viewsets.ModelViewSet):
+    serializer_class = VolunteerSerializer
+    queryset = Volunteer.objects.all()
+
+class OrganizationView(viewsets.ModelViewSet):
+    serializer_class = OrganizationSerializer
+    queryset = Organization_Official.objects.all()
+
+class EventsView(viewsets.ModelViewSet):
+    serializer_class = EventsSerializer
+    queryset = Events.objects.all()
