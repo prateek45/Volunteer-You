@@ -11,6 +11,7 @@ from .serializers import VolunteerSerializer, OrganizationSerializer, EventsSeri
 
 from .models import Organization_Official, Volunteer, Events
 from .forms import CreateUser
+
 from .decorators import allowed_users, unauthenticated_user
 
 # Create your views here.
@@ -81,13 +82,12 @@ def logout_page(request):
     return redirect('login')
 
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['Organization'])
 def event_create(request):
     form = CreateEvent()
     if request.method == 'POST':
-        form = EventCreate(request.POST)
+        form = CreateEvent(request.POST)#EventCreate(request.POST)
         if form.is_valid:
-            event = form.save()
-            #If user is an organization, create an event
             if request.user.groups.filter(name = 'Organization'):
                 Events.objects.create(
                     organization = request.user.groups.name,
@@ -103,6 +103,34 @@ def event_create(request):
                 messages.info("You do not have permission for this functionality.")
     context = {}
     return render(request, '', context)
+
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['Organization'])
+def UpdateEvent(request, pk):
+
+    event = Events.objects.get(id = pk)
+    form = CreateEvent(instance = event)
+    
+    if request.method == 'POST':
+        form = CreateEvent(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect('Organization')
+    
+    context = {'form': form}
+    return render(request, '',context)
+
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['Organization'])
+def deleteEvent(request, pk):
+    
+    event = Events.objects.get(id = pk)
+    
+    if request.method == 'POST':
+        event.delete()
+        return redirect('Manager')
+    
+    context = {'item':event}
 
 class VolunteerView(viewsets.ModelViewSet):
     serializer_class = VolunteerSerializer
