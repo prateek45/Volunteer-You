@@ -10,7 +10,7 @@ from rest_framework import viewsets
 from .serializers import VolunteerSerializer, OrganizationSerializer, EventsSerializer
 
 from .models import Organization_Official, Volunteer, Events
-from .forms import CreateUser
+from .forms import CreateEvent, CreateUser
 
 from .decorators import allowed_users, unauthenticated_user
 
@@ -88,19 +88,8 @@ def event_create(request):
     if request.method == 'POST':
         form = CreateEvent(request.POST)#EventCreate(request.POST)
         if form.is_valid:
-            if request.user.groups.filter(name = 'Organization'):
-                Events.objects.create(
-                    organization = request.user.groups.name,
-                    title = event.title,
-                    description = event.description,
-                    slots = event.slots,
-                    roster = "",
-                    contact = event.contact,
-                    location = event.location
-                )
-                return redirect('Organization')
-            else:
-                messages.info("You do not have permission for this functionality.")
+            form.save()
+            return redirect('Organization')
     context = {}
     return render(request, '', context)
 
