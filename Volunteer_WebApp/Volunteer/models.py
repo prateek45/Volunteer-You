@@ -44,4 +44,7 @@ class Events(models.Model):
     roster = models.CharField(max_length=10000,null = False, blank= False)
     contact = models.CharField(max_length=1000,null = False, blank= False)
     location = models.CharField(max_length=10000,null = False, blank= False)
+
+    def __str__(self):
+        return self.title
     
