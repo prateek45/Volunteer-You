@@ -13,7 +13,7 @@ profession = [
     
 # Create your models here.
 class Volunteer(models.Model):
-    user = models.OneToOneField(User, null= False, blank = False, on_delete= models.CASCADE)
+    user = models.ForeignKey(User, related_name= 'volunteer', null= False, blank = False, on_delete= models.CASCADE)
     name = models.CharField(max_length=500,null = False)
     age =  models.PositiveIntegerField(default=10,validators=[MinValueValidator(5)], null=False)
     profession = models.CharField(max_length=500, choices=profession ,default="Volunteer", null=False)
@@ -25,7 +25,7 @@ class Volunteer(models.Model):
 	    return self.name
 
 class Organization_Official(models.Model):
-    user = models.OneToOneField(User, null= False, blank = False, on_delete= models.CASCADE)
+    user = models.ForeignKey(User, null= False, related_name = 'organization' , blank = False, on_delete= models.CASCADE)
     name = models.CharField(max_length=200,null = False)
     profession = models.CharField(max_length=500, choices=profession ,default="Organization Official", null=False)
     Organization = models.CharField(max_length=200,null = False)
@@ -36,7 +36,7 @@ class Organization_Official(models.Model):
 	    return self.name
 
 class Events(models.Model):
-    organization = models.OneToOneField(Organization_Official,null=False, blank= False, on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization_Official,related_name = 'event',null=False, blank= False, on_delete=models.CASCADE)
     title = models.CharField(max_length=200,null = False)
     photo = models.ImageField(default = "", null = True, blank = True)
     description = models.CharField(max_length=10000,null = False, blank= False)
