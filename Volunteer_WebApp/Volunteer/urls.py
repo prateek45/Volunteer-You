@@ -1,19 +1,17 @@
+from django.urls.conf import include
 from django.urls import path
-
+from rest_framework import routers
 from . import views
 
 # urlpatterns = [
 #     path('snippets/', views.snippet_list),
 #     path('snippets/<int:pk>/', views.snippet_detail),
 # ]
+router = routers.DefaultRouter()
+router.register(r'volunteers', views.VolunteerView, 'volunteer')
+router.register(r'organizations', views.OrganizationView, 'organization')
+router.register(r'events', views.EventsView, 'event')
 
 urlpatterns = [
-	path('register/', views.Register, name="register"),
-	path('login/', views.login_page, name="login"),  
-	path('logout/', views.logout_page, name="logout"),
-    path('', views.home, name="home"),
-
-	path('update_event/<str:pk>/', views.UpdateEvent, name="update_Event"),
-    path('delete_event/<str:pk>/', views.deleteEvent, name="delete_Event"),
-  
+    path('api/', include(router.urls)),
 ]
