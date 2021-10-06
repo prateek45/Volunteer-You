@@ -6,6 +6,7 @@ import Home from './pages';
 import About from './pages/about';
 import Services from './pages/services';
 import Contact from './pages/contact';
+import { Login } from './components/Login/index';
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
         <Route path='/about' component={About} />
         <Route path='/services' component={Services} />
         <Route path='/contact-us' component={Contact} />
-        
+        <Route path='/signin' component={Login} />
       </Switch>
     </Router>
   );
