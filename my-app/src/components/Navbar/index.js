@@ -7,13 +7,14 @@ import {
   NavBtn,
   NavBtnLink
 } from './NavbarElements';
+import "./style.css";
 
 const Navbar = () => {
   return (
     <>
       <Nav>
         <NavLink to='/'>
-          <img src={require('../../images/vol.png')} alt='logo' />
+          <img src={require('../../images/vol.png').default} alt='logo' className="logo" />
         </NavLink>
         <Bars />
         <NavMenu>
