@@ -49,10 +49,6 @@ export class Login extends React.Component{
 
     handleLogin(e) {
         e.preventDefault();
-        console.log("Username is " + this.state.username);
-        console.log("Password is " + this.state.password);
-        console.log(this.state.volunteers);
-        console.log(this.state.organisations);
         var user = this.state.username;
         var pass = this.state.password;
         var vol = this.state.volunteers;
