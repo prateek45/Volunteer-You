@@ -14,9 +14,10 @@ function EventResults()  {
     })  
   }, []);
   for (var i  = 0; i < events.count; i++) {
-      if (events.results[i].title === searchVal) {
+      var data = events.results[i];
+      console.log(data);
+      if (data.title.includes(searchVal) || data.description.includes(searchVal) || data.organization.includes(searchVal)) {
         results = results + 1;
-
       }
     }
   return (
