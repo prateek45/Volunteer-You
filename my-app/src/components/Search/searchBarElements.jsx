@@ -15,6 +15,7 @@ export class SearchBar extends React.Component{
         }
         this.redirect = this.redirect.bind(this);
         this.updateSearch = this.updateSearch.bind(this);
+        this.updateSort = this.updateSort.bind(this);
     }
 
     redirect(e) {
@@ -31,6 +32,13 @@ export class SearchBar extends React.Component{
         })
     }
 
+    updateSort(e) {
+        this.setState({
+            searched: 0,
+            sort: e.target.value
+        })
+    }
+
     render(){
         return(
             <IconContext.Provider
@@ -43,7 +51,7 @@ export class SearchBar extends React.Component{
                     </div>
                     <div id="searchList"> 
                         <h1> Sort By </h1>
-                        <select id = "searchMenu">
+                        <select id = "searchMenu" onChange = {this.updateSort}>
                             <option value = "name">Name</option>
                             <option value = "location">Location</option>
                             <option value = "slots"> Available Slots</option>
