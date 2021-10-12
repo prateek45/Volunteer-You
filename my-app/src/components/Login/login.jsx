@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Redirect} from "react-router-dom";
 
 
 export class Login extends React.Component{
@@ -68,9 +68,15 @@ export class Login extends React.Component{
         }
         console.log(this.state.logResult);
         if (this.state.logResult === 1) {
+            this.setState({
+                logResult: 1
+            })
             console.log("Valid Volunteer.");
         } else if (this.state.logResult === 2) {
             console.log("Valid Organisation.");
+            this.setState({
+                logResult: 2
+            })
         } else {
             this.setState({
                 logResult: -1
@@ -93,7 +99,12 @@ export class Login extends React.Component{
                     <input type="password" required="required" placeholder="Password" name="p" value = {this.state.password} onChange = {this.passwordChange}></input>  
                     <button className="but" method = 'post'>Login</button>
                 </form>
-            </div>
+                {this.state.logResult != 0 && this.state.logResult != -1 && 
+                    <Redirect to={{
+                        pathname: '/',                            
+                    }}                            
+                    />}
+        </div>
         </div>)
     }
      
