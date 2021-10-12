@@ -2,7 +2,6 @@ import React from "react";
 import "./style.css";
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IconContext } from "react-icons";
-import {ReturnResults} from "./redirect.jsx";
 import {Redirect} from "react-router-dom";
 
 export class SearchBar extends React.Component{
@@ -11,16 +10,24 @@ export class SearchBar extends React.Component{
         super(props);
         this.state = {
             sort: "name",
-            value: "test",
+            value: "",
             searched: 0
         }
         this.redirect = this.redirect.bind(this);
+        this.updateSearch = this.updateSearch.bind(this);
     }
 
     redirect(e) {
         e.preventDefault();
         this.setState({
             searched: 1
+        })
+    }
+
+    updateSearch(e) {
+        this.setState({
+            searched: 0,
+            value: e.target.value
         })
     }
 
@@ -32,7 +39,7 @@ export class SearchBar extends React.Component{
                 <div id="Searchbar">
                     <div id="searchIcon"> <AiOutlineSearch /> </div>
                     <div id="searchInput">
-                        <input type="text" required="required" placeholder="Search for events here" name="searchText" id = "searchText"></input> 
+                        <input type="text" required="required" placeholder="Search for events here" name="searchText" id = "searchText" onChange= {this.updateSearch}></input> 
                     </div>
                     <div id="searchList"> 
                         <h1> Sort By </h1>
@@ -47,7 +54,7 @@ export class SearchBar extends React.Component{
                     </div>
                     {this.state.searched === 1 && 
                         <Redirect to={{
-                            pathname: '/results'
+                            pathname: '/search/'+this.state.value+'?'+this.state.sort,                            
                         }}                            
                         />
                     }

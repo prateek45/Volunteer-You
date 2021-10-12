@@ -1,7 +1,16 @@
 import React from 'react';
 import {SearchBar} from '../components/Search/index';
 
-const SearchResults = () => {
+const EventResults = () => {
+  var info = window.location.href.split('/')[4].split('?');
+  var searchVal = info[0];
+  var sortVal = info[1];
+  return (
+    <h1> You searched for {searchVal} sorted by {sortVal}</h1>
+  );
+};
+
+const SearchVanilla = () => {
   return ( 
     <div
       style={{
@@ -14,6 +23,15 @@ const SearchResults = () => {
     > 
       <SearchBar />   
       <h1>Search Results</h1>
+    </div>
+  );
+};
+
+const SearchResults = () => {
+  return (
+    <div>
+      <SearchVanilla />
+      <EventResults />
     </div>
   );
 };

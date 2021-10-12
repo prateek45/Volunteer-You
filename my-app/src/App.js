@@ -21,7 +21,7 @@ function App() {
         <Route path='/services' component={Services} />
         <Route path='/contact-us' component={Contact} />
         <Route path='/signin' component={Login} />
-        <Route path='/search' component={SearchResults} />
+        <Route path='/search/*' component={SearchResults} />
       </Switch>
     </Router>
   );
