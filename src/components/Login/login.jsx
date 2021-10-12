@@ -1,4 +1,5 @@
 import React from "react";
+import { SearchBar } from './components/Search/index';
 
 
 export class Login extends React.Component{

@@ -2,7 +2,7 @@ import React from 'react';
 import {SearchBar} from '../components/Search/index';
 
 
-const Home = () => {
+const SearchResults = () => {
   return ( 
     <div
       style={{
@@ -14,9 +14,9 @@ const Home = () => {
       }}
     > 
       <SearchBar />   
-      <h1>Home</h1>
+      <h1>Search Results</h1>
     </div>
   );
 };
 
-export default Home;
+export default SearchResults;
