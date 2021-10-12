@@ -1,7 +1,6 @@
 import React from 'react';
 import {SearchBar} from '../components/Search/index';
 
-
 const SearchResults = () => {
   return ( 
     <div

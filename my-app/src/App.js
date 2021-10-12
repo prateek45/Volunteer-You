@@ -6,6 +6,7 @@ import Home from './pages';
 import About from './pages/about';
 import Services from './pages/services';
 import Contact from './pages/contact';
+import SearchResults from './pages/search';
 import { Login } from './components/Login/index';
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/services' component={Services} />
         <Route path='/contact-us' component={Contact} />
         <Route path='/signin' component={Login} />
+        <Route path='/search' component={SearchResults} />
       </Switch>
     </Router>
   );
