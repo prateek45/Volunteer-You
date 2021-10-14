@@ -8,12 +8,14 @@ import Services from './pages/services';
 import Contact from './pages/contact';
 import SearchResults from './pages/search';
 import { Login } from './components/Login/index';
+import data from './components/Event/data';
+import EventCard from'./components/Event/EventCard';
 
 
 function App() {
 
   return (
-    <Router>
+    <><Router>
       <Navbar />
       <Switch>
         <Route path='/' exact component={Home} />
@@ -23,7 +25,19 @@ function App() {
         <Route path='/signin' component={Login} />
         <Route path='/search/*' component={SearchResults} />
       </Switch>
-    </Router>
+    </Router><div className="wrapper">
+        <h1>Events</h1>
+        {data.map((event) => (
+          <EventCard 
+          additional={event.additional}
+          diet={event.diet}
+          key={event.name} 
+          name={event.name}
+          scientificName={event.scientificName}
+          size={event.size}/>
+
+        ))}
+      </div></>
   );
 }
 
