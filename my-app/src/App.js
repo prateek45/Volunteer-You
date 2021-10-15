@@ -25,19 +25,7 @@ function App() {
         <Route path='/signin' component={Login} />
         <Route path='/search/*' component={SearchResults} />
       </Switch>
-    </Router><div className="wrapper">
-        <h1>Events</h1>
-        {data.map((event) => (
-          <EventCard 
-          additional={event.additional}
-          diet={event.diet}
-          key={event.name} 
-          name={event.name}
-          scientificName={event.scientificName}
-          size={event.size}/>
-
-        ))}
-      </div></>
+    </Router></>
   );
 }
 
