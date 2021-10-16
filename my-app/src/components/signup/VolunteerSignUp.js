@@ -35,6 +35,10 @@ class VolunteerSignUp extends Component {
   render() {
     return (
       <div className="formCenter">
+        <h1> Volunteer Sign Up </h1>
+        <Link to="/sign-up-org" className="formFieldLink">
+          Click here to sign up as an organisation
+        </Link>
         <form className="formFields" onSubmit={this.handleSubmit}>
           <div className="formField">
             <label className="formFieldLabel" htmlFor="username">
@@ -84,7 +88,7 @@ class VolunteerSignUp extends Component {
           <div className="formField">
             <button className="formFieldButton">Sign Up</button>{" "}
             <Link to="/signin" className="formFieldLink">
-              I'm already member
+              I'm already a member
             </Link>
           </div>
         </form>

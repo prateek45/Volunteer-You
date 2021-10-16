@@ -25,7 +25,7 @@ function App() {
         <Route path='/contact-us' component={Contact} />
         <Route path='/signin' component={Login} />
         <Route path='/search/*' component={SearchResults} />
-        <Route path='/sign-up' component={VolunteerSignUp} />
+        <Route path='/sign-up-vol' component={VolunteerSignUp} />
         <Route path='/sign-up-org' component={OrganisationSignUp} />
       </Switch>
     </Router></>
