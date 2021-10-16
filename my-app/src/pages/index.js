@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import {SearchBar} from '../components/Search/index';
+import EventCard, {AllCard} from'../components/Event/EventCard';
 import data from '../components/Event/data';
-import EventCard from'../components/Event/EventCard';
+import axios from 'axios';
+
+
 
 const Home = () => {
+  const [cards, setCards] = useState([]);
+  useEffect(() => {
+  axios.get('/^api/events').then(res => {
+      setCards(res.data.results);      
+    })  
+  }, []); 
+  cards.map ((test) => (
+    console.log(test)
+  ))
+
   return ( 
     <div
       style={{
@@ -17,16 +30,14 @@ const Home = () => {
       <SearchBar />   
       <h1>Home</h1>
       <div className="wrapper">
-        <h1>Events</h1>
-        {data.map((event) => (
+        {cards.map((event) => (
           <EventCard 
           additional={event.additional}
-          diet={event.diet}
-          key={event.name} 
-          name={event.name}
-          scientificName={event.scientificName}
-          size={event.size}/>
-
+          title={event.title}
+          description={event.description} 
+          slots={event.slots}
+          contact={event.contact}
+          location={event.location}/>
         ))}
       </div>
     </div>
