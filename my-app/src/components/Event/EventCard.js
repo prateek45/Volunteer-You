@@ -15,7 +15,7 @@ export default function EventCard(
         <h4>{contact}</h4>
         <h4>{location}</h4>
         <p>{description}</p>
-        <h4>{slots} slots </h4>
+        <h4>{slots} slots</h4>
     </div>
 )}
 

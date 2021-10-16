@@ -10,7 +10,8 @@ import SearchResults from './pages/search';
 import { Login } from './components/Login/index';
 import data from './components/Event/data';
 import EventCard from'./components/Event/EventCard';
-
+import OrganisationSignUp from './components/signup/OrganisationSignUp'
+import VolunteerSignUp from './components/signup/VolunteerSignUp'
 
 function App() {
 
@@ -24,6 +25,8 @@ function App() {
         <Route path='/contact-us' component={Contact} />
         <Route path='/signin' component={Login} />
         <Route path='/search/*' component={SearchResults} />
+        <Route path='/sign-up' component={VolunteerSignUp} />
+        <Route path='/sign-up-org' component={OrganisationSignUp} />
       </Switch>
     </Router></>
   );
