@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {SearchBar} from '../components/Search/index';
 import EventCard, {AllCard} from'../components/Event/EventCard';
-import data from '../components/Event/data';
 import axios from 'axios';
 
 
