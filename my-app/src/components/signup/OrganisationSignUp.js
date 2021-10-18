@@ -32,6 +32,22 @@ class OrganisationSignUp extends Component {
 
     console.log("The form was submitted with the following data:");
     console.log(this.state);
+    const subUsername = this.state.username;
+    const subPassword = this.state.password;
+    const subEmail = this.state.email;
+    const subOrg = this.state.organisation;
+    axios.post('/^api/organizations/', {
+      name: subUsername,
+      password: subPassword,
+      email: subEmail,
+      Organization: subOrg,
+    })
+    .then(function (response) {      
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error.response);
+    })
   }
 
   render() {
