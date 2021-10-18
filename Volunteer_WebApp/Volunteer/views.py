@@ -14,8 +14,7 @@ class VolunteerView(viewsets.ModelViewSet):
     serializer_class = VolunteerSerializer
     queryset = Volunteer.objects.all()
     permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnly, )
+        permissions.AllowAny,)
 
 class OrganizationView(viewsets.ModelViewSet):
     """
@@ -24,8 +23,7 @@ class OrganizationView(viewsets.ModelViewSet):
     serializer_class = OrganizationSerializer
     queryset = Organization_Official.objects.all()
     permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnly, )
+        permissions.AllowAny,)
 
 
 class EventsView(viewsets.ModelViewSet):

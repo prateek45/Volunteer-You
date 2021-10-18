@@ -20,10 +20,11 @@ class Volunteer(models.Model):
     profession = models.CharField(max_length=500, default="Volunteer", null=False)
     email = models.EmailField(unique=True,null=False)
     Profile_photo = models.ImageField(default = "", null = True, blank = True)
-    address = models.CharField(max_length=500,null = False)
+    address = models.CharField(max_length=500,null = False, default="Test")
+    password = models.CharField(max_length=500,null = False, default='')
     
     def __str__(self):
-	    return self.Volunteer_user.username
+	    return self.name
 
 class Organization_Official(models.Model):
     Organization_user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name= 'Organization_Official', null= True, blank = True, on_delete= models.CASCADE)
@@ -32,9 +33,10 @@ class Organization_Official(models.Model):
     Organization = models.CharField(max_length=200,null = False)
     email = models.EmailField(unique=True,null=False)
     Profile_photo = models.ImageField(default = "", null = True, blank = True)
+    password = models.CharField(max_length=500,null = False, default='')
     
     def __str__(self):
-	    return self.Organization_user.username
+	    return self.name
 
 class Events(models.Model):
     organization = models.ForeignKey(Organization_Official,related_name = 'event',null=False, blank= False, on_delete=models.CASCADE)

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 class VolunteerSignUp extends Component {
   constructor() {
@@ -27,9 +28,23 @@ class VolunteerSignUp extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     console.log("The form was submitted with the following data:");
     console.log(this.state);
+    const subUsername = this.state.username;
+    const subPassword = this.state.password;
+    const subEmail = this.state.email;
+    axios.post('/^api/volunteers/', {
+      name: subUsername,
+      password: subPassword,
+      email: subEmail,
+    })
+    .then(function (response) {      
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+
   }
 
   render() {
