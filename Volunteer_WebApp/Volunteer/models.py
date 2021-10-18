@@ -21,7 +21,7 @@ class Volunteer(models.Model):
     email = models.EmailField(unique=True,null=False)
     Profile_photo = models.ImageField(default = "", null = True, blank = True)
     address = models.CharField(max_length=500,null = False, default="Test")
-    password = models.CharField(max_length=500,null = False, default='')
+    password = models.CharField(max_length=500,null = False)
     
     def __str__(self):
 	    return self.name
@@ -33,7 +33,7 @@ class Organization_Official(models.Model):
     Organization = models.CharField(max_length=200,null = False)
     email = models.EmailField(unique=True,null=False)
     Profile_photo = models.ImageField(default = "", null = True, blank = True)
-    password = models.CharField(max_length=500,null = False, default='')
+    password = models.CharField(max_length=500,null = False)
     
     def __str__(self):
 	    return self.name

@@ -33,6 +33,7 @@ class VolunteerSignUp extends Component {
     const subUsername = this.state.username;
     const subPassword = this.state.password;
     const subEmail = this.state.email;
+    console.log(subPassword);
     axios.post('/^api/volunteers/', {
       name: subUsername,
       password: subPassword,

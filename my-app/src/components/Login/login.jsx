@@ -57,12 +57,12 @@ export class Login extends React.Component{
         var org = this.state.organisations;
         for (let i = 0; i < vol.count; i++) {
             //Address is temp until we add passwords
-            if (vol.results[i].name === user && vol.results[i].address === pass) {
+            if (vol.results[i].name === user && vol.results[i].password === pass) {
                 console.log(">")
                 this.state.logResult = 1;            }
         }
         for (let i = 0; i < org.count; i++) {
-            if (org.results[i].name === user && org.results[i].Organization === pass) {
+            if (org.results[i].name === user && org.results[i].password === pass) {
                 this.state.logResult = 2;
             }
         }
