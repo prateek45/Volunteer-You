@@ -1,5 +1,6 @@
 export default [
     {
+      id:1,
       name: 'Lion',
       scientificName: 'Panthero leo',
       size: 140,
@@ -7,6 +8,7 @@ export default [
       
     },
     {
+      id:2,
       name: 'Gorilla',
       scientificName: 'Gorilla beringei',
       size: 205,
@@ -16,6 +18,7 @@ export default [
       }
     },
     {
+      id:3,
       name: 'Zebra',
       scientificName: 'Equus quagga',
       size: 322,

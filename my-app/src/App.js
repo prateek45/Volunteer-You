@@ -12,6 +12,7 @@ import data from './components/Event/data';
 import EventCard from'./components/Event/EventCard';
 import OrganisationSignUp from './components/signup/OrganisationSignUp'
 import VolunteerSignUp from './components/signup/VolunteerSignUp'
+import event from './components/Event/event'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/search/*' component={SearchResults} />
         <Route path='/sign-up-vol' component={VolunteerSignUp} />
         <Route path='/sign-up-org' component={OrganisationSignUp} />
+        <Route path='/event/:id' component={event}/>
       </Switch>
     </Router></>
   );
