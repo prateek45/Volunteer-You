@@ -47,20 +47,23 @@ const Home = () => {
       <SearchBar />   
       <h1>Home</h1>
       <div className="wrapper">
-        {cards.map((event) => (
-          <li key = {event.id} style = {{
-            listStyleType: 'none'
-            }} >
-            <EventCard 
-          additional={event.additional}
-          title={event.title}
-          description={event.description} 
-          slots={event.slots}
-          contact={event.contact}
-          location={event.location}
-          id={event.id}/>
-          </li>
-        ))}
+        <ul>
+          {cards.map((event) => (
+            <li key = {event.id} style = {{
+              listStyleType: 'none'
+              }} >
+                
+              <EventCard 
+            additional={event.additional}
+            title={event.title}
+            description={event.description} 
+            slots={event.slots}
+            contact={event.contact}
+            location={event.location}
+            id={event.id}/>
+            </li>
+          ))}    
+        </ul>
       </div>
       <div>
       <Pagination 
