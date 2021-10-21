@@ -1,8 +1,10 @@
+from django_filters.filters import FilterMethod
 from Volunteer.permission import IsOwnerOrReadOnly
-from rest_framework import viewsets
-from rest_framework.pagination import PageNumberPagination
+from rest_framework import viewsets,filters
 from .serializers import VolunteerSerializer, OrganizationSerializer, EventsSerializer
 from Volunteer.models import Organization_Official, Volunteer, Events
+from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.
 
@@ -29,4 +31,4 @@ class EventsView(viewsets.ModelViewSet):
     """
     serializer_class = EventsSerializer
     queryset = Events.objects.all()
-
+    search_fields = ['title','organization__name', 'description', 'slots', 'location']

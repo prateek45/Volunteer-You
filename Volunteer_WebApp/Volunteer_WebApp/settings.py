@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_filters',
     'corsheaders',
     'rest_framework',
     'Volunteer',
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'rest_framework.authtoken',
+    'rest_framework.filters',
 ]
 
 MIDDLEWARE = [
