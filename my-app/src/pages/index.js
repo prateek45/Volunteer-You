@@ -12,9 +12,6 @@ const Home = () => {
       setCards(res.data.results);      
     })  
   }, []); 
-  cards.map ((test) => (
-    console.log(test)
-  ))
 
   return ( 
     <div

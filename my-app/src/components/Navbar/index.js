@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Nav,
   NavLink,
@@ -8,17 +8,23 @@ import {
   NavBtnLink
 } from './NavbarElements';
 import "./style.css";
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
+  const [userTyp, forceUpdate] = useState(localStorage.getItem('userType'));
+  const location = useLocation();
 
+  React.useEffect(() => {
+  }, [location])
+
+  function signOut() {
+    localStorage.clear()
+    forceUpdate()
+  }
+
+
+  console.log(userTyp)
   var userType = localStorage.getItem('userType');
-  React.useEffect(() => { 
-    window.addEventListener('storage', () => {
-      userType = localStorage.getItem('userType');     
-    });     
-  }, [])
-
-  console.log(userType);
   return (
     <>
       <Nav>
@@ -45,7 +51,7 @@ const Navbar = () => {
         
         <NavBtn>
           {userType == null && <NavBtnLink to='/signin'>Sign In</NavBtnLink>}
-          {userType != null && <NavBtnLink to='/signout'>Sign Out</NavBtnLink>}
+          {userType != null && <NavBtnLink to='/' onClick = {signOut}>Sign Out</NavBtnLink>}
         </NavBtn>
       </Nav>
     </>

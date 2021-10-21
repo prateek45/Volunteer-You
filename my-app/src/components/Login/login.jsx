@@ -97,7 +97,7 @@ export class Login extends React.Component{
                 {(this.state.logResult === 1 || this.state.logResult === 2) && 
                     <Redirect to={{
                         pathname: '/',                            
-                    } && window.location.reload()}                            
+                    } && console.log("test")}                            
                     />}
         </div>
         </div>)
