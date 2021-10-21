@@ -5,19 +5,22 @@ import { IconContext } from "react-icons";
 import {Redirect} from "react-router-dom";
 
 export class SearchBar extends React.Component{
-
+    //Constructor function
     constructor(props) {
         super(props);
+        //Set three variables as states: the type of sort, the search value and an indicator of whether they have searched.
         this.state = {
             sort: "name",
             value: "",
             searched: 0
         }
+        //Bind functions to this.
         this.redirect = this.redirect.bind(this);
         this.updateSearch = this.updateSearch.bind(this);
         this.updateSort = this.updateSort.bind(this);
     }
 
+    //Function that indicates the user has selected the search button.
     redirect(e) {
         e.preventDefault();
         this.setState({
@@ -25,6 +28,8 @@ export class SearchBar extends React.Component{
         })
     }
 
+    //Function for when the user is modifying their search input, makes sure 
+    //app does not think user it still searching.
     updateSearch(e) {
         this.setState({
             searched: 0,
@@ -32,6 +37,8 @@ export class SearchBar extends React.Component{
         })
     }
 
+    //Function to update sort Type, makes sure 
+    //app does not think user it still searching.
     updateSort(e) {
         this.setState({
             searched: 0,
@@ -40,6 +47,9 @@ export class SearchBar extends React.Component{
     }
 
     render(){
+        //Return HTML Content.
+        //IconContext.Provider modifies size of reactIcon.
+        //When this.state.search == 1 (ie users click the search button), app will redirect to search page and append search value and sort type to url.
         return(
             <IconContext.Provider
                 value={{ size: '100%'}}

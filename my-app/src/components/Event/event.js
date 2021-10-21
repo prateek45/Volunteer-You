@@ -1,19 +1,23 @@
 import React, {useState, useEffect} from "react";
-import data from "./data";
 import axios from "axios";
 
 
 export default function Event() {
+    //Get the id of the event from the url
     const eventID = window.location.href.split('/')[4];
+    //Declare a constant event and its setter setEvent
     const [event, setEvent] = useState([]);
 
+    //Send a get request for the events
     useEffect(() => {
     axios.get('/^api/events').then(res => {
+        //Use setEvent to set event to be the event with id matching the id in url.
         const results = res.data.results;        
-        setEvent(results.filter(event => event.id == eventID)[0]);     
+        setEvent(results.filter(event => event.id === eventID)[0]);     
     })  
-    }, []);
+    }, [eventID]);
     console.log(event);
+    //Fill out attributes of event from event data.
     const title = event.title;
     const contact = event.contact;
     const location = event.location;

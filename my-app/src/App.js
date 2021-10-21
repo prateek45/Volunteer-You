@@ -8,8 +8,6 @@ import Services from './pages/services';
 import Contact from './pages/contact';
 import SearchResults from './pages/search';
 import { Login } from './components/Login/index';
-import data from './components/Event/data';
-import EventCard from'./components/Event/EventCard';
 import OrganisationSignUp from './components/signup/OrganisationSignUp'
 import VolunteerSignUp from './components/signup/VolunteerSignUp'
 import event from './components/Event/event'

@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import {SearchBar} from '../components/Search/index';
-import EventCard, {AllCard} from'../components/Event/EventCard';
+import EventCard from'../components/Event/EventCard';
 import axios from 'axios';
 
 const Home = () => {
+  //Declare constant cards and its setter setCards
   const [cards, setCards] = useState([]);
+  //Send get request for all events from api
   useEffect(() => {
   axios.get('/^api/events').then(res => {
+    //Use setCards to set cards equal to event data
       setCards(res.data.results);      
     })  
   }, []); 
-
+  //Return default content
+  //Then, add a search bar
+  //For every event in cards, map it to a new event card and fill out the data.
   return ( 
     <div
       style={{

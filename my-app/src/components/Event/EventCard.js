@@ -1,7 +1,5 @@
 import React from 'react';
 import './EventCard.css';
-//import data from './data';
-//import data from './components/Event/data';
 import { Link } from 'react-router-dom';
 
 export default function EventCard(
@@ -25,28 +23,3 @@ export default function EventCard(
                         }}>Apply</Link>
     </div>
 )}
-
-function returnEvent(eventData) {
-    var title = eventData.title;
-    var description = eventData.description;
-    var slots = eventData.slots;
-    var contact = eventData.contact;
-    var location = eventData.location;
-    return {title, description, slots, contact, location};
-    console.log({title, description, slots, contact, location});
-}
-
-/*
-<div className="wrapper">
-        <h1>Events</h1>
-        {events.map((event) => (
-          <EventCard 
-          additional={event.additional}
-          title={event.Title}
-          description={event.Description} 
-          slots={event.Slots}
-          contact={event.Contact}
-          location={event.Location}/>
-        ))}
-      </div>
-*/
