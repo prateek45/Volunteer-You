@@ -3,8 +3,6 @@ import {SearchBar} from '../components/Search/index';
 import EventCard, {AllCard} from'../components/Event/EventCard';
 import axios from 'axios';
 
-
-
 const Home = () => {
   const [cards, setCards] = useState([]);
   useEffect(() => {
@@ -33,7 +31,8 @@ const Home = () => {
           description={event.description} 
           slots={event.slots}
           contact={event.contact}
-          location={event.location}/>
+          location={event.location}
+          id={event.id}/>
         ))}
       </div>
     </div>

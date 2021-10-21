@@ -23,7 +23,6 @@ function EventResults()  {
       if (data.title.includes(searchVal) || data.description.includes(searchVal) || data.organization.includes(searchVal)) {
         results = results + 1;
         IDArr.push(data.id);
-        console.log(IDArr);
       }
     }
   return (
@@ -41,7 +40,8 @@ function EventResults()  {
               description={event.description} 
               slots={event.slots}
               contact={event.contact}
-              location={event.location}/>
+              location={event.location}
+              id={event.id}/>
           )}
             return null;
         })}

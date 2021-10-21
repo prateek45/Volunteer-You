@@ -10,7 +10,8 @@ export default function EventCard(
     description,
     slots,
     contact,
-    location,   
+    location,
+    id,   
   }
 ) {    
     return (
@@ -19,22 +20,11 @@ export default function EventCard(
         <h4>Location: {location}</h4>
         <p>{description}</p>
         <h4>Slots: {slots} </h4>
-        <Link className='apply' to={'/event/${data.id}'}>Apply</Link>
+        <Link className='apply' to={{
+                            pathname: '/event/'+id,                            
+                        }}>Apply</Link>
     </div>
 )}
-
-export function AllCard(eventJSON) {
-    var events = [];
-    const numEvents = eventJSON.count;
-    for (let i = 0; i < numEvents; i++) {
-        var title = eventJSON.results[i].title;
-        console.log(title);
-        events.push(EventCard(returnEvent(eventJSON.results[i])));
-        console.log(EventCard(returnEvent(eventJSON.results[i])));
-    }
-    console.log(events);
-    return events;
-}
 
 function returnEvent(eventData) {
     var title = eventData.title;

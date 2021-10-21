@@ -46,7 +46,7 @@ const Navbar = () => {
         <NavBtn>
           {userType == null && <NavBtnLink to='/sign-up-vol'>Sign Up</NavBtnLink>}
           {userType == 'vol' && <NavBtnLink to='/profile'>Profile</NavBtnLink>}
-          {userType == 'org' && <NavBtnLink to='/events'>Manage Events</NavBtnLink>}
+          {userType == 'org' && <NavBtnLink to='/myevents'>Manage Events</NavBtnLink>}
         </NavBtn>
         
         <NavBtn>
