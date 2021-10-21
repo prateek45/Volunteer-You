@@ -8,6 +8,7 @@ class OrganisationSignUp extends Component {
   state = {
     email: "",
     password: "",
+    password2: "",
     username: "",
     signedup: 0
     };
@@ -35,23 +36,28 @@ class OrganisationSignUp extends Component {
     console.log(this.state);
     const subUsername = this.state.username;
     const subPassword = this.state.password;
+    const subPassword2 = this.state.password2;
     const subEmail = this.state.email;
     const subOrg = this.state.organisation;
-    axios.post('/^api/organizations/', {
-      name: subUsername,
-      password: subPassword,
-      email: subEmail,
-      Organization: subOrg,
-    })
-    .then(response => {      
-      console.log(response);
-      this.setState({
-        signedup: 1
+    if (subPassword === subPassword2) {
+      axios.post('/^api/organizations/', {
+        name: subUsername,
+        password: subPassword,
+        email: subEmail,
+        Organization: subOrg,
       })
-    })
-    .catch(function (error) {
-      console.log(error.response);
-    })
+      .then(response => {      
+        console.log(response);
+        this.setState({
+          signedup: 1
+        })
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      })
+    } else {
+      console.log("Wrong Password")
+    }
   }
 
   render() {
@@ -127,12 +133,31 @@ class OrganisationSignUp extends Component {
           </div>
 
           <div className="formField">
+            <label className="formFieldLabel" htmlFor="password">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              id="password2"
+              className="formFieldInput"
+              placeholder="ReEnter your password"
+              name="password"
+              value={this.state.password2}
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <div className="formField">
             <button className="formFieldButton">Sign Up</button>{" "}
             <Link to="/signin" className="formFieldLink">
               I'm already a member
             </Link>
           </div>
         </form>
+        {(this.state.signedup === 1) && <Redirect to={{ 
+          pathname: '/',
+          }}
+          />}
       </div>
     );
   }

@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 export default function EventCard(
     { 
         title,
-    description,
-    slots,
-    contact,
-    location,
-    id,   
+        description,
+        slots,
+        contact,
+        location,
+        id,   
   }
 ) {    
     return (

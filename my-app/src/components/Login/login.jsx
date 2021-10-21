@@ -64,6 +64,9 @@ export class Login extends React.Component{
             //For every volunteer, check if user credentials match their credentials.
             const vol = data;
             for (let i = 0; i < vol.count; i++) {
+                console.log(pass)
+                console.log(vol.results[i].password)
+                console.log(vol.results[i].password === pass)
                 if (vol.results[i].name === user && vol.results[i].password === pass) {
                     //If so, write their unique userid and usertype (vol in this case) to localStorage
                     localStorage.setItem('userID', vol.results[i].id);
@@ -74,6 +77,7 @@ export class Login extends React.Component{
                     })         
                 }
             }
+            console.log(this.state.logResult)
             //After checking all volunteers, iterate dispError to indicate volunteers have been checked.
             this.setState({
                 dispError: this.state.dispError + 1
@@ -105,6 +109,7 @@ export class Login extends React.Component{
         <div className="all">
             <div className="login">
                 <div className = "h1">Login</div>
+                
                 {this.state.dispError === 2 && <p className = 'invalid'> Error: Incorrect combination of username and password. Please try again. </p>}
                 <form className="form" onSubmit = {this.handleLogin}>
                     <input type="text" required="required" placeholder="UserName" name="u" value = {this.state.username} onChange = {this.usernameChange}></input>  

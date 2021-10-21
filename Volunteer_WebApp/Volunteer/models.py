@@ -47,7 +47,8 @@ class Events(models.Model):
     roster = models.CharField(max_length=10000,null = False, blank= False)
     contact = models.CharField(max_length=1000,null = False, blank= False)
     location = models.CharField(max_length=10000,null = False, blank= False)
-
+    date_created = models.DateTimeField(auto_now_add=True,verbose_name="Date Created")
+    
     def __str__(self):
         return self.title
     
