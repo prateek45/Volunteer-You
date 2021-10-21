@@ -1,21 +1,25 @@
 import React from 'react';
 import './EventCard.css';
+//import data from './data';
 //import data from './components/Event/data';
+import { Link } from 'react-router-dom';
 
 export default function EventCard(
-    {title,
+    { 
+        title,
     description,
     slots,
     contact,
-    location  
+    location,   
   }
 ) {    
     return (
-    <div className="eventwrapper"><h2>{title}</h2>
-        <h4>{contact}</h4>
-        <h4>{location}</h4>
+    <div className="eventwrapper"><h2 className='title'>{title}</h2>
+        <h4>Contact: {contact}</h4>
+        <h4>Location: {location}</h4>
         <p>{description}</p>
-        <h4>{slots} slots</h4>
+        <h4>Slots: {slots} </h4>
+        <Link className='apply' to={'/event/${data.id}'}>Apply</Link>
     </div>
 )}
 
