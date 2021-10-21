@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import axios from 'axios';
 
 class VolunteerSignUp extends Component {
@@ -9,7 +10,8 @@ class VolunteerSignUp extends Component {
     this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      signedup: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,8 +41,11 @@ class VolunteerSignUp extends Component {
       password: subPassword,
       email: subEmail,
     })
-    .then(function (response) {      
+    .then(response => {      
       console.log(response);
+      this.setState({
+        signedup: 1
+      })
       
     })
     .catch(function (error) {
@@ -52,6 +57,11 @@ class VolunteerSignUp extends Component {
   render() {
     return (
       <div className="formCenter">
+      {this.state.signedup === 1 && 
+          <Redirect to={{
+              pathname: '/signin',                            
+          }}                            
+          />}
         <h1> Volunteer Sign Up </h1>
         <Link to="/sign-up-org" className="formFieldLink">
           Click here to sign up as an organisation

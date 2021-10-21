@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import {Redirect} from "react-router-dom";
 
 class OrganisationSignUp extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      email: "",
-      password: "",
-      name: "",
-      hasAgreed: false
+  
+  state = {
+    email: "",
+    password: "",
+    username: "",
+    signedup: 0
     };
+  constructor(props) {
+    super(props);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,8 +43,11 @@ class OrganisationSignUp extends Component {
       email: subEmail,
       Organization: subOrg,
     })
-    .then(function (response) {      
+    .then(response => {      
       console.log(response);
+      this.setState({
+        signedup: 1
+      })
     })
     .catch(function (error) {
       console.log(error.response);
@@ -52,7 +56,13 @@ class OrganisationSignUp extends Component {
 
   render() {
     return (
+  
       <div className="formCenter">
+          {this.state.signedup === 1 && 
+                    <Redirect to={{
+                        pathname: '/signin',                            
+                    }}                            
+                    />}
         <h1> Organisation Sign Up </h1>
         <Link to="/sign-up-vol" className="formFieldLink">
           Click here to sign up as a volunteer
@@ -73,6 +83,7 @@ class OrganisationSignUp extends Component {
             />
           </div>
           <div className="formField">
+
             <label className="formFieldLabel" htmlFor="organisation">
               organisation name
             </label>
