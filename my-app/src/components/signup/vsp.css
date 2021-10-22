@@ -1,0 +1,84 @@
+.head{
+    text-align: center;
+}
+
+.formFieldLink{
+    text-align: center;
+    color: white;
+    background-color: #f69392;
+    width: 300px;
+    padding: 14px 25px;
+    vertical-align: top;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 200px;   
+    margin-right: 40px;
+}
+
+.formFieldLink:hover{
+    color: black;
+    background-color: white;
+    
+}
+
+.formFieldLabel{
+    margin-left: 300px;
+}
+
+.formFieldInput{
+    margin-left: 300px;
+    width: 800px;   
+    height: 50px;   
+    margin-bottom: 10px;   
+    outline: none;   
+    padding: 10px;   
+    font-size: 13px;   
+    color: black;   
+    border-top: 1px solid #312E3D;   
+    border-left: 1px solid #312E3D;   
+    border-right: 1px solid #312E3D;   
+    border-bottom: 1px solid #56536A;   
+    border-radius: 4px;   
+    background-color: #ffffff;   
+    display: inline-block;
+}
+
+.formFieldButton{
+    color: white;
+    background-color: #f69392;
+    font-size: 15px;
+    width: 300px;
+    padding: 14px 25px;
+    vertical-align: top;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.formFieldButton:hover{
+    color: black;
+    background-color: white;
+    
+}
+
+.formFieldLink1{
+    color: white;
+    background-color: #f69392;
+    font-size: 20px;
+    padding: 14px 25px;
+    vertical-align: top;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.formFieldLink1:hover{
+    color: black;
+    background-color: white;
+    
+}
