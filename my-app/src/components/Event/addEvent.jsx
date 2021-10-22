@@ -28,9 +28,11 @@ export class addEvent extends React.Component  {
     }
 
     async componentDidMount(){
+      console.log(localStorage.getItem('userID'));
       const id = localStorage.getItem('userID');
       axios.get('/^api/organizations').then(res =>{
         const results = res.data.results;
+        console.log(results);
         for (var i in results) {
           if (results[i].id == id ) {
             this.setState({
@@ -95,6 +97,7 @@ export class addEvent extends React.Component  {
       const org = this.state.orgName;
       const location = this.state.location;
       const contact = this.state.contact;
+      const image = this.state.image;
       console.log(title)
       console.log(numVol)
       console.log(date)
@@ -102,6 +105,7 @@ export class addEvent extends React.Component  {
       console.log(org)
       console.log(location)
       console.log(contact)
+      console.log(image)
       //Get all current volunteers
       axios.post('/^api/events/', {
         title: title,
@@ -110,7 +114,8 @@ export class addEvent extends React.Component  {
         //date: date,
         slots: numVol,
         location: location,
-        contact: contact
+        contact: contact,
+        photo: image
       })
       .then(response => {
           console.log(response.data);

@@ -3,7 +3,8 @@ import "./style.css";
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IconContext } from "react-icons";
 import {Redirect} from "react-router-dom";
-import "antd/dist/antd.css";import { Button, Tooltip } from "antd";
+import "antd/dist/antd.css";
+import { Button, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
 export class SearchBar extends React.Component{
