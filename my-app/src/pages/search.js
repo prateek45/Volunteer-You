@@ -3,10 +3,13 @@ import {SearchBar} from '../components/Search/index';
 import axios from 'axios';
 import EventCard from'../components/Event/EventCard';
 
+
 //The function controlling what events are returned from a search.
-function EventResults()  {
+function EventResults(searchData)  {
   //Creates array of search term and sort type as array.
   const info = window.location.href.split('/')[4].split('?');
+  const searchstate = searchData;
+  console.log(searchstate);
   //Defines values and decodes from URI format.
   const searchVal = decodeURI(info[0]);
   const sortVal = decodeURI(info[1]);
@@ -58,31 +61,38 @@ function EventResults()  {
 };
 
 //The default html of the search page.
-const SearchVanilla = () => {
-  return ( 
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%',
-        flexDirection: 'column'
-      }}
-    > 
-      <SearchBar />   
+export default class SearchVanilla extends React.Component {
+  constructor() {
+    super();
+    this.state = {nameSearch: '', orderby: ''};
+    this.callbackFunction = this.callbackFunction.bind(this);
+  } 
+  
+  callbackFunction(name) {
+    this.setState({
+      nameSearch: name,
+  });
+  }
+  
+  render() {
+    return <div>
+      <div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+          flexDirection: 'column'
+        }}
+      > 
+      <SearchBar callbackFunction = {this.callbackFunction}/>   
       <h1>Search Results</h1>
     </div>
-  );
-};
-
-//Super function that returns both vanilla and searchable content
-const SearchResults = () => {
-  return (
     <div>
-      <SearchVanilla />
-      <EventResults />
+      <EventResults searchData= {this.state}/>
     </div>
-  );
-};
-
-export default SearchResults;
+    </div>
+    </div>
+  }
+}

@@ -13,7 +13,7 @@ export default function Event() {
     axios.get('/^api/events').then(res => {
         //Use setEvent to set event to be the event with id matching the id in url.
         const results = res.data.results;        
-        setEvent(results.filter(event => event.id == eventID)[0]);     
+        setEvent(results.filter(event => event.id === eventID)[0]);     
     })  
     }, [eventID]);
     console.log(event);
