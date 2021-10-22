@@ -32,10 +32,11 @@ export class addEvent extends React.Component  {
       axios.get('/^api/organizations').then(res =>{
         const results = res.data.results;
         for (var i in results) {
-          if (results[i].id === id ) {
+          if (results[i].id == id ) {
             this.setState({
               orgName: results[i].id
             })
+            console.log('test')
           }
         }
       })     
