@@ -10,54 +10,44 @@ function EventResults()  {
   //Defines values and decodes from URI format.
   const searchVal = decodeURI(info[0]);
   const sortVal = decodeURI(info[1]);
-  //Iterable variable for number of results.
-  var results = 0;
+  console.log(searchVal);
+  console.log(sortVal);
+
   //Constants and their settters, assigned values in useEffect
   const [events, setEvents] = useState([]);
   const [cards, setCards] = useState([]);   
+  
   useEffect(() => {
-  axios.get('/^api/events').then(res => {
-      setEvents(res.data);      
-      setCards(res.data.results);
-    })  
-  }, []);
-  //Array of event ID's for pushing later.
-  var IDArr = [];
-  //For every event in the database, check if the title, description or organisation includes the search term.
-  for (var i  = 0; i < events.count; i++) {
-      var data = events.results[i];
-      console.log(data);
-      if (data.title.includes(searchVal) || data.description.includes(searchVal)) {
-        //If yes, iterate the number of results and push the corresponding event id to IDArr.
-        results = results + 1;
-        IDArr.push(data.id);
-      }
-    }
+    let link = '/^api/events?search='+searchVal+'&ordering='+sortVal;
+    axios.get(link).then(res => {
+      //Use setCards to set cards equal to event data
+      setEvents(res.data);   
+      setCards(res.data.results);  
+      })  
+    }, [searchVal,sortVal]);
+    
   return (
     <div>
       {//Placeholder, describes status of search registered by app for easy viewing
         }
       <h1> You searched for {searchVal} sorted by {sortVal}</h1>
-      <h1> Found {results} matching results </h1>
+      <h1> Found {events.count} matching results </h1>
       <div className="wrapper">
       {//For every event with id in IDArr, list it's eventCard
         }
-        {cards.map((event) => {
-          if (IDArr.includes(event.id)) {
-            IDArr.splice(IDArr.indexOf(event.id), 1);
-            return(
+        {cards.map((events) => {
+          return(
               <EventCard 
-              additional={event.additional}
-              title={event.title}
-              description={event.description} 
-              slots={event.slots}
-              contact={event.contact}
-              location={event.location}
-              id={event.id}/>
+              additional={events.additional}
+              title={events.title}
+              description={events.description} 
+              slots={events.slots}
+              contact={events.contact}
+              location={events.location}
+              id={events.id}/>
           )}
         //If an event isn't in the search, return null.
-            return null;
-        })}
+        )}
       </div>
     </div>
   );
