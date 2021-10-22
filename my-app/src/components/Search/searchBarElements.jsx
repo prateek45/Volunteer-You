@@ -29,7 +29,6 @@ export class SearchBar extends React.Component{
         this.setState({
             searched: 1
         })
-        this.forceUpdate();
     }
 
     //Function for when the user is modifying their search input, makes sure 

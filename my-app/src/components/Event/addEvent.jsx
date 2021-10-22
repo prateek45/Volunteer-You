@@ -114,8 +114,7 @@ export class addEvent extends React.Component  {
         //date: date,
         slots: numVol,
         location: location,
-        contact: contact,
-        photo: image
+        contact: contact
       })
       .then(response => {
           console.log(response.data);
