@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import './osp.css';
 import {Redirect} from "react-router-dom";
 
 class OrganisationSignUp extends Component {
@@ -69,7 +70,7 @@ class OrganisationSignUp extends Component {
                         pathname: '/signin',                            
                     }}                            
                     />}
-        <h1> Organisation Sign Up </h1>
+        <h1 className='head'> Organisation Sign Up </h1>
         <Link to="/sign-up-vol" className="formFieldLink">
           Click here to sign up as a volunteer
         </Link>

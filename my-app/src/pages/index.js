@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {SearchBar} from '../components/Search/index';
 import EventCard from'../components/Event/EventCard';
-import Pagination from "./pagination";
+import Pagi from "./pagination";
 import axios from 'axios';
+import 'antd/dist/antd.css';
+import { Pagination } from 'antd';
 
 const Home = () => {
   //Declare constant cards and its setter setCards
@@ -45,7 +47,7 @@ const Home = () => {
       }}
     > 
       <SearchBar />   
-      <h1>Home</h1>
+ 
       <div className="wrapper">
         <ul>
           {cards.map((event) => (
@@ -65,12 +67,8 @@ const Home = () => {
           ))}    
         </ul>
       </div>
-      <div>
-      <Pagination 
-      postsPerPage={postsPerPage}
-      totalPosts={postLength}
-      nextPage = {nextPage}
-        />
+      <div className='page'>
+        <Pagination defaultCurrent={1} total={50} />
       </div>
     </div>
   );

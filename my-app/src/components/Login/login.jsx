@@ -104,7 +104,7 @@ export class Login extends React.Component{
         return(
         <div className="all">
             <div className="login">
-                <div className = "h1">Login</div>
+                <div className = "h1">Sign in</div>
                 {this.state.dispError === 2 && <p className = 'invalid'> Error: Incorrect combination of username and password. Please try again. </p>}
                 <form className="form" onSubmit = {this.handleLogin}>
                     <input type="text" required="required" placeholder="UserName" name="u" value = {this.state.username} onChange = {this.usernameChange}></input>  

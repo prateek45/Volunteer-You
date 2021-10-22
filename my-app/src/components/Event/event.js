@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import './event.css';
 import axios from "axios";
 
 
@@ -24,11 +25,12 @@ export default function Event() {
     const description = event.description;
     const slots = event.slots;
     return(
-        <div className="eventwrapper"><h2>{title}</h2>
-        <h4>Contact: {contact}</h4>
-        <h4>Location: {location}</h4>
-        <p>{description}</p>
-        <h4>Slots: {slots} </h4>
+        <div className="e">
+        <h2 className='tit'>{title}</h2>
+        <h4 className='contact'>Contact: {contact}</h4>
+        <h4 className='loc'>Location: {location}</h4>
+        <p className='des'>{description}</p>
+        <h4 className='slot'>Slots: {slots} </h4>
     </div>
     )
 };

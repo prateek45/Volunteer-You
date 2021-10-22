@@ -3,6 +3,8 @@ import "./style.css";
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IconContext } from "react-icons";
 import {Redirect} from "react-router-dom";
+import "antd/dist/antd.css";import { Button, Tooltip } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
 export class SearchBar extends React.Component{
     //Constructor function
@@ -68,8 +70,8 @@ export class SearchBar extends React.Component{
                             <option value = "slots"> Available Slots</option>
                         </select>
                     </div>
-                    <div id="searchSubmit">
-                        <button id="searchBut" type="submit" onClick = {this.redirect}>Search</button> 
+                    <div className='searchSubmit' >
+                        <button type="submit" onClick = {this.redirect} icon={<SearchOutlined />}>Search</button>
                     </div>
                     {this.state.searched === 1 && 
                         <Redirect to={{
