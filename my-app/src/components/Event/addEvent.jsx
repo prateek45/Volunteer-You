@@ -6,7 +6,7 @@ export class addEvent extends React.Component  {
 
     state = {
       title: '',
-      numVol: '',
+      numVol: 1,
       date: 0,
       image: '',
       descr: '',
