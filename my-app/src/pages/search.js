@@ -3,96 +3,92 @@ import {SearchBar} from '../components/Search/index';
 import axios from 'axios';
 import EventCard from'../components/Event/EventCard';
 
-
 //The function controlling what events are returned from a search.
-function EventResults(searchData)  {
+function EventResults()  {
   //Creates array of search term and sort type as array.
   const info = window.location.href.split('/')[4].split('?');
-  const searchstate = searchData;
-  console.log(searchstate);
   //Defines values and decodes from URI format.
   const searchVal = decodeURI(info[0]);
   const sortVal = decodeURI(info[1]);
-  
+  //Iterable variable for number of results.
+  var results = 0;
   //Constants and their settters, assigned values in useEffect
   const [events, setEvents] = useState([]);
   const [cards, setCards] = useState([]);   
-  
   useEffect(() => {
-    let link = '/^api/events?search='+info[0]+'&ordering='+info[1];
-    axios.get(link).then(res => {
-    console.log(res);
+  axios.get('/^api/events').then(res => {
       setEvents(res.data);      
       setCards(res.data.results);
     })  
   }, []);
-  
+  //Array of event ID's for pushing later.
+  var IDArr = [];
+  //For every event in the database, check if the title, description or organisation includes the search term.
+  for (var i  = 0; i < events.count; i++) {
+      var data = events.results[i];
+      console.log(data);
+      if (data.title.includes(searchVal) || data.description.includes(searchVal)) {
+        //If yes, iterate the number of results and push the corresponding event id to IDArr.
+        results = results + 1;
+        IDArr.push(data.id);
+      }
+    }
   return (
     <div>
       {//Placeholder, describes status of search registered by app for easy viewing
         }
       <h1> You searched for {searchVal} sorted by {sortVal}</h1>
-      <h1> Found {events.count} matching results </h1>
+      <h1> Found {results} matching results </h1>
       <div className="wrapper">
       {//For every event with id in IDArr, list it's eventCard
         }
-        {events.count > 0 &&
-        <ul>
-          {cards.map((event) => (
-            <li key = {event.id} style = {{
-              listStyleType: 'none'
-              }} >
-                
+        {cards.map((event) => {
+          if (IDArr.includes(event.id)) {
+            IDArr.splice(IDArr.indexOf(event.id), 1);
+            return(
               <EventCard 
-            additional={event.additional}
-            title={event.title}
-            description={event.description} 
-            slots={event.slots}
-            contact={event.contact}
-            location={event.location}
-            id={event.id}/>
-            </li>
-          ))}    
-        </ul>     
-        }
+              additional={event.additional}
+              title={event.title}
+              description={event.description} 
+              slots={event.slots}
+              contact={event.contact}
+              location={event.location}
+              id={event.id}/>
+          )}
+        //If an event isn't in the search, return null.
+            return null;
+        })}
       </div>
     </div>
   );
 };
 
 //The default html of the search page.
-export default class SearchVanilla extends React.Component {
-  constructor() {
-    super();
-    this.state = {nameSearch: '', orderby: ''};
-    this.callbackFunction = this.callbackFunction.bind(this);
-  } 
-  
-  callbackFunction(name) {
-    this.setState({
-      nameSearch: name,
-  });
-  }
-  
-  render() {
-    return <div>
-      <div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
-          flexDirection: 'column'
-        }}
-      > 
-      <SearchBar callbackFunction = {this.callbackFunction}/>   
+const SearchVanilla = () => {
+  return ( 
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        flexDirection: 'column'
+      }}
+    > 
+      <SearchBar />   
       <h1>Search Results</h1>
     </div>
+  );
+};
+
+//Super function that returns both vanilla and searchable content
+const SearchResults = () => {
+  return (
     <div>
-      <EventResults searchData= {this.state}/>
+      <SearchVanilla />
+      <EventResults />
     </div>
-    </div>
-    </div>
-  }
-}
+  );
+};
+
+export default SearchResults;
