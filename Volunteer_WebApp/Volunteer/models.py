@@ -20,10 +20,11 @@ class Volunteer(models.Model):
     profession = models.CharField(max_length=500, default="Volunteer", null=False)
     email = models.EmailField(unique=True,null=False)
     Profile_photo = models.ImageField(default = "", null = True, blank = True)
-    address = models.CharField(max_length=500,null = False)
+    address = models.CharField(max_length=500,null = False, default="Test")
+    password = models.CharField(max_length=500,null = False)
     
     def __str__(self):
-	    return self.Volunteer_user.username
+	    return self.name
 
 class Organization_Official(models.Model):
     Organization_user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name= 'Organization_Official', null= True, blank = True, on_delete= models.CASCADE)
@@ -32,20 +33,22 @@ class Organization_Official(models.Model):
     Organization = models.CharField(max_length=200,null = False)
     email = models.EmailField(unique=True,null=False)
     Profile_photo = models.ImageField(default = "", null = True, blank = True)
+    password = models.CharField(max_length=500,null = False)
     
     def __str__(self):
-	    return self.Organization_user.username
+	    return self.name
 
 class Events(models.Model):
-    organization = models.ForeignKey(Organization_Official,related_name = 'event',null=False, blank= False, on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization_Official,related_name = 'event',null=True, blank= False, on_delete=models.CASCADE)
     title = models.CharField(max_length=200,null = False)
     photo = models.ImageField(default = "", null = True, blank = True)
     description = models.CharField(max_length=10000,null = False, blank= False)
     slots = models.PositiveIntegerField(default=10,validators=[MinValueValidator(1)], null=False)
-    roster = models.CharField(max_length=10000,null = False, blank= False)
+    roster = models.CharField(max_length=10000,null = False, blank= False, default = '')
     contact = models.CharField(max_length=1000,null = False, blank= False)
     location = models.CharField(max_length=10000,null = False, blank= False)
-
+    date_created = models.DateTimeField(auto_now_add=True,verbose_name="Date Created")
+    
     def __str__(self):
         return self.title
     
