@@ -36,7 +36,7 @@ export class addEvent extends React.Component  {
             this.setState({
               orgName: results[i].id
             })
-            console.log('test')
+
           }
         }
       })     
