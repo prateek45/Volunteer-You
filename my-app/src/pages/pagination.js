@@ -1,21 +1,17 @@
 import React from 'react';
+import 'antd/dist/antd.css';
+import { Pagination } from 'antd';
 
-const Pagi = ({ postsPerPage, totalPosts, nextPage}) => {
-  const pageNumbers = [];
+const Pagi = ({ totalPage, postsPerPage, nextPageEvents}) => {
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNumbers.push(i);
+  function nextPage(page) {
+    console.log(page);
+    nextPageEvents(page);
   }
-  console.log(pageNumbers);
+
   return (
     <nav>
-      <ul className='pagination'>
-        {pageNumbers.map(number => (
-          <li onClick={() => nextPage(number)} key={number} className='page-item'>
-              {number}
-          </li>
-        ))}
-      </ul>
+      <Pagination onChange={nextPage} total={totalPage} pageSize = {postsPerPage}/>
     </nav>
   );
 };

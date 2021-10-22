@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'rest_framework.authtoken',
     'rest_framework.filters',
+    'rest_framework.pagination',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +86,7 @@ WSGI_APPLICATION = 'Volunteer_WebApp.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -92,7 +94,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20
+    'PAGE_SIZE': 5
 }
 
 SITE_ID = 1

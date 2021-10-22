@@ -32,3 +32,5 @@ class EventsView(viewsets.ModelViewSet):
     serializer_class = EventsSerializer
     queryset = Events.objects.all()
     search_fields = ['title','organization__name', 'description', 'slots', 'location']
+    ordering_fields  = ['title','organization__name', 'description', 'slots', 'date_created']
+    ordering = ['-date_created']

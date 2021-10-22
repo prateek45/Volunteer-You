@@ -4,16 +4,15 @@ import EventCard from'../components/Event/EventCard';
 import Pagi from "./pagination";
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import { Pagination } from 'antd';
 
 const Home = () => {
   //Declare constant cards and its setter setCards
   const [cards, setCards] = useState([]);
-  const [postsPerPage] = useState(20);
+  const [postsPerPage] = useState(5);
   const [postLength,setPosts] = useState([])
   //Send get request for all events from api
   useEffect(() => {
-  axios.get('/^api/events').then(res => {
+  axios.get('/^api/events/').then(res => {
     //Use setCards to set cards equal to event data
     setCards(res.data.results);   
     setPosts(res.data.count);  
@@ -21,7 +20,8 @@ const Home = () => {
   }, []);
   
   //Get Next page Data
-  function nextPage(pageNumber) {
+  function nextPageEvents(pageNumber) {
+    console.log(pageNumber);
     let link = '/^api/events?page=' + pageNumber.toString();
     axios.get(link).then(res => {
       //Use setCards to set cards equal to event data
@@ -68,7 +68,11 @@ const Home = () => {
         </ul>
       </div>
       <div className='page'>
-        <Pagination defaultCurrent={1} total={50} />
+        <Pagi 
+        totalPage = {postLength}
+        postsPerPage = {postsPerPage}
+        nextPageEvents = {nextPageEvents}
+        />
       </div>
     </div>
   );
