@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import {Redirect} from "react-router-dom";
 
 export class addEvent extends React.Component  {
 
@@ -11,7 +12,8 @@ export class addEvent extends React.Component  {
       descr: '',
       orgName: '',
       contact: '',
-      location: ''
+      location: '',
+      submitted: 0
     };
     //constructor with binds for functions
     constructor(props){
@@ -118,6 +120,9 @@ export class addEvent extends React.Component  {
       })
       .then(response => {
           console.log(response.data);
+          this.setState({
+            submitted: 1
+          })
       })
       .catch(function (error) {
         console.log(error);
@@ -249,6 +254,10 @@ export class addEvent extends React.Component  {
             Add now
           </button>
         </div>
+        {(this.state.submitted === 1) && <Redirect to={{ 
+          pathname: '/',
+          }}
+          />}
         <style
           dangerouslySetInnerHTML={{
             __html: "\n.addEvent{\n    text-align: center;\n}\nbody {\n\tcolor: rgb(63, 63, 63);\n\tfont-family:'Times New Roman', Times, serif;\n\tfont-size: 15px;\n}\n.button1{\n    -webkit-transition-duration: 0.4s;\n    transition-duration: 0.4s;\n    padding: 15px 28px;\n    text-align: center;\n    background-color: #3d0669;;\n    color:white;\n    border: 2px solid #7f07e2;\n    border-radius:5px;\n    display:block;\n    margin:0 auto;\n }\n.button1:hover {\n background-color:white;\n color:black;\n }\n.form-row{\n     margin:5px 100px;\n }\n\n.info-input{\n    font-family:'Times New Roman', Times, serif;\n}\n.info-textarea {\n    font-family:'Times New Roman', Times, serif;\n    width: 570px;\n    height: 150px;\n    margin-top: 14px;\n    border: 1px solid #DDDDDD;\n    box-sizing: border-box;\n    padding-left: 13px;\n    padding-top: 13px;\n    resize: none;\n    box-shadow: 0px 13px 10px -15px #ccc inset;\n}\ntextarea::-webkit-input-placeholder{\n    color: #999999;\n}\n.section {\n    background-color:rgba(187, 227, 243, 0.87);\n}\n",
