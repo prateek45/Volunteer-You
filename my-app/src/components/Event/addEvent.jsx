@@ -10,7 +10,9 @@ export class addEvent extends React.Component  {
       date: 0,
       image: '',
       descr: '',
-      orgName: ''
+      orgName: '',
+      contact: '',
+      location: ''
     };
     //constructor with binds for functions
     constructor(props){
@@ -22,6 +24,8 @@ export class addEvent extends React.Component  {
         this.changeDate = this.changeDate.bind(this);
         this.changeImage = this.changeImage.bind(this);
         this.changeDescr = this.changeDescr.bind(this);
+        this.changeLoc = this.changeLoc.bind(this);
+        this.changeContact = this.changeContact.bind(this);
     }
 
     async componentDidMount(){
@@ -31,7 +35,7 @@ export class addEvent extends React.Component  {
         for (var i in results) {
           if (results[i].id == id ) {
             this.setState({
-              orgName: results[i].name
+              orgName: results[i].id
             })
           }
         }
@@ -68,6 +72,18 @@ export class addEvent extends React.Component  {
       })
     }
 
+    changeContact(e) {
+      this.setState({
+          contact: e.target.value
+      })
+    }
+
+    changeLoc(e) {
+      this.setState({
+        location: e.target.value
+      })
+    }
+
     handleSubmit(e) {
       //Prevent default button actions.
       e.preventDefault();
@@ -77,13 +93,24 @@ export class addEvent extends React.Component  {
       const date = this.state.date;
       const descr = this.state.descr;
       const org = this.state.orgName;
+      const location = this.state.location;
+      const contact = this.state.contact;
+      console.log(title)
+      console.log(numVol)
+      console.log(date)
+      console.log(descr)
+      console.log(org)
+      console.log(location)
+      console.log(contact)
       //Get all current volunteers
       axios.post('/^api/events/', {
         title: title,
         description: descr,
         organization: org,
         //date: date,
-        slots: numVol
+        slots: numVol,
+        location: location,
+        contact: contact
       })
       .then(response => {
           console.log(response.data);
@@ -111,6 +138,34 @@ export class addEvent extends React.Component  {
                   className="info-input"
                   placeholder="Event name..."
                   onChange = {this.changeTitle} />
+                <br />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset className="section">
+            <div className="form-row">
+              <h2 className="title">Contact Details</h2>
+              <div className="form-value" id="postad-title">
+                <input
+                  type="text"
+                  name="event"
+                  className="info-input"
+                  placeholder="Contact Details"
+                  onChange = {this.changeContact} />
+                <br />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset className="section">
+            <div className="form-row">
+              <h2 className="title">Location</h2>
+              <div className="form-value" id="postad-title">
+                <input
+                  type="text"
+                  name="event"
+                  className="info-input"
+                  placeholder="Location"
+                  onChange = {this.changeLoc} />
                 <br />
               </div>
             </div>
