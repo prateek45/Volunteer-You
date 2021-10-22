@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import './osp.css';
 import {Redirect} from "react-router-dom";
 
 class OrganisationSignUp extends Component {
@@ -71,9 +70,6 @@ class OrganisationSignUp extends Component {
                     }}                            
                     />}
         <h1 className='head'> Organisation Sign Up </h1>
-        <Link to="/sign-up-vol" className="formFieldLink">
-          Click here to sign up as a volunteer
-        </Link>
         <form onSubmit={this.handleSubmit} className="formFields">
           <div className="formField">
             <label className="formFieldLabel" htmlFor="username">
@@ -149,8 +145,11 @@ class OrganisationSignUp extends Component {
           </div>
 
           <div className="formField">
+          <Link to="/sign-up-vol" className="formFieldLink">
+          Click here to sign up as a volunteer
+        </Link>
             <button className="formFieldButton">Sign Up</button>{" "}
-            <Link to="/signin" className="formFieldLink">
+            <Link to="/signin" className="formFieldLink1">
               I'm already a member
             </Link>
           </div>

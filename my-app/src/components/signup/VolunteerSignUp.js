@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {Redirect} from "react-router-dom";
 import axios from 'axios';
+import './vsp.css'
 
 class VolunteerSignUp extends Component {
   constructor() {
@@ -69,16 +70,14 @@ class VolunteerSignUp extends Component {
               pathname: '/signin',                            
           }}                            
           />}
-        <h1> Volunteer Sign Up </h1>
-        <Link to="/sign-up-org" className="formFieldLink">
-          Click here to sign up as an organisation
-        </Link>
+        <h1 className='head'> Volunteer Sign Up </h1>
+        
         <form className="formFields" onSubmit={this.handleSubmit}>
           <div className="formField">
             <label className="formFieldLabel" htmlFor="username">
               Username
             </label>
-            <input
+            <input 
               type="username"
               id="username"
               className="formFieldInput"
@@ -133,13 +132,18 @@ class VolunteerSignUp extends Component {
               onChange={this.handleChange}
             />
           </div>
+        
 
           <div className="formField">
+          <Link to="/sign-up-org" className="formFieldLink">
+          Click here to sign up as an organisation
+        </Link>
             <button className="formFieldButton">Sign Up</button>{" "}
-            <Link to="/signin" className="formFieldLink">
+            <Link to="/signin" className="formFieldLink1">
               I'm already a member
             </Link>
           </div>
+          
         </form>
         {(this.state.signedup === 1) && <Redirect to={{ 
           pathname: '/',
