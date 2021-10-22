@@ -11,6 +11,7 @@ import { Login } from './components/Login/index';
 import OrganisationSignUp from './components/signup/OrganisationSignUp'
 import VolunteerSignUp from './components/signup/VolunteerSignUp'
 import event from './components/Event/event'
+import {addEvent} from './components/Event/addEvent'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/sign-up-vol' component={VolunteerSignUp} />
         <Route path='/sign-up-org' component={OrganisationSignUp} />
         <Route path='/event/:id' component={event}/>
+        <Route path='/myevents' component={addEvent}/>
       </Switch>
     </Router></>
   );
