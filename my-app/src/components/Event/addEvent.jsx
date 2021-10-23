@@ -101,7 +101,9 @@ export class addEvent extends React.Component  {
       const location = this.state.location;
       const contact = this.state.contact;
       const image = this.state.image;
-
+      if (image || title || numVol || descr || org || location || contact) {
+        alert('Please Fill the required fields with *');
+      }
       console.log(title)
       console.log(typeof(numVol))
       console.log(date)
@@ -119,7 +121,7 @@ export class addEvent extends React.Component  {
       formData.append('location', location);
       formData.append('photo', image[0]);
       formData.append('contact', contact);
-      
+
       axios.post(`/api/events/`, formData
       ).then(response => {
           console.log(response.data);
@@ -138,11 +140,11 @@ export class addEvent extends React.Component  {
       <div>
         <meta charSet="utf-8" />
         <title>Add Event</title>
-        <h1 className="addEvent">Add Event</h1>
+        <h1 className="addEvent">Add Event *</h1>
         <div className="body1">
           <fieldset className="section">
             <div className="form-row">
-              <h2 className="title1">Event Name</h2>
+              <h2 className="title1">Event Name *</h2>
               <div className="form-value" id="postad-title">
                 <input
                   type="text"
@@ -156,7 +158,7 @@ export class addEvent extends React.Component  {
           </fieldset>
           <fieldset className="section">
             <div className="form-row">
-              <h2 className="title1">Contact Details</h2>
+              <h2 className="title1">Contact Details *</h2>
               <div className="form-value" id="postad-title">
                 <input
                   type="text"
@@ -170,7 +172,7 @@ export class addEvent extends React.Component  {
           </fieldset>
           <fieldset className="section">
             <div className="form-row">
-              <h2 className="title1">Location</h2>
+              <h2 className="title1">Location *</h2>
               <div className="form-value" id="postad-title">
                 <input
                   type="text"
@@ -184,19 +186,19 @@ export class addEvent extends React.Component  {
           </fieldset>
           <fieldset className="section">
             <div className="form-row">
-              <h2 className="title1">Number of participants</h2>
+              <h2 className="title1">Number of participan *</h2>
               <input className='number' type="number" min={0} max={10000} step={1} defaultValue={1} onChange={this.changeNumVol}/>
             </div>
           </fieldset>
           <fieldset className="section">
             <div className="form-row">
-              <h2 className="title1">Event Date</h2>
+              <h2 className="title1">Event Date *</h2>
               <input className='date' type="date" defaultValue="2021-03-30" onChange = {this.changeDate}/>
             </div>
           </fieldset>
           <fieldset className="section">
             <div className="form-row">
-              <h2 className="title1">Description</h2>
+              <h2 className="title1">Description *</h2>
               <div className="form-value">
                 <textarea
                   className="info-textarea"
