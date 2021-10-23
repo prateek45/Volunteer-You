@@ -8,10 +8,11 @@ import Services from './pages/services';
 import Contact from './pages/contact';
 import SearchVanilla from './pages/search';
 import { Login } from './components/Login/index';
-import OrganisationSignUp from './components/signup/OrganisationSignUp'
-import VolunteerSignUp from './components/signup/VolunteerSignUp'
-import event from './components/Event/event'
-import {addEvent} from './components/Event/addEvent'
+import OrganisationSignUp from './components/signup/OrganisationSignUp';
+import VolunteerSignUp from './components/signup/VolunteerSignUp';
+import event from './components/Event/event';
+import {addEvent} from './components/Event/addEvent';
+import { Profile } from "./components/Profile/index";
 
 function App() {
 
