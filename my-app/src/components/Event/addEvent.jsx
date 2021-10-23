@@ -101,7 +101,7 @@ export class addEvent extends React.Component  {
       const location = this.state.location;
       const contact = this.state.contact;
       const image = this.state.image;
-      if (image || title || numVol || descr || org || location || contact) {
+      if (!image || !title || !numVol || !descr || !location || !contact) {
         alert('Please Fill the required fields with *');
       }
       console.log(title)
