@@ -5,40 +5,69 @@ import {Link} from 'react-router-dom';
 export class EditProfile extends React.Component{
     
     state = {
-        usertype: localStorage.getItem('userType'),
-        userID: localStorage.getItem('userID'),
-        data: [],
-        events: []
+        name: '',
+        age: 18,
+        email: '',
+        contact: '',
+        userType: localStorage.getItem('userType'),
+        userID: localStorage.getItem('userID')
     }
 
     constructor(props){
         super(props);
 
+        this.handleChange = this.handleChange.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
+    }
 
+    handleChange(event) {
+        let target = event.target;
+        let value = target.type === "checkbox" ? target.checked : target.value;
+        let name = target.name;
+
+        this.setState({
+          [name]: value
+        });
+      }
+
+    handleEdit(e) {
+        e.preventDefault();
+        console.log(this.state);
+        const name = this.state.name;
+        const age = this.state.age;
+        const email = this.state.email
+        const contact = this.state.contact;
+        const userType = this.state.userType;
+        const userID = this.state.userID;
+        if (userType == 'vol') {
+            axios.put('/api/volunteers/' + userID + '/', {
+                name: name,
+                age: age,
+                email: email,
+                contact: contact
+            }).then(res=> {
+                console.log(res)
+            })
+            .catch(error=> {
+                console.log(error.response.data)
+            })
+        }
     }
 
     render(){
-        console.log(this.state.data)
-        console.log(this.state.events)
-        const events = this.state.events
-        const data = this.state.data
+
         return(
         <div className="box">
             <div className="box1">
                 <div className="user1">
                     <div className="userB">
                         <div className="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" width="150"></img>
                             <div className="mt-3">
-                            <h4>{data.name}</h4>
-                            <p>{data.profession}</p>
-                            {this.state.usertype == 'org' && <p>{data.Organization}</p>}
-                            {this.state.usertype == 'vol' && <p>{data.address}</p>}
                             </div>
                         </div>
                         <div className="bb">
                             <Link to='/profile' className="but">Cancel Changes</Link>
-                            <button to='/profile' className="but">Confirm Changes</button>
+                            <a className="but" onClick = {this.handleEdit} >Confirm Changes</a>
                         </div>
                     </div>
                 </div>
@@ -50,11 +79,9 @@ export class EditProfile extends React.Component{
                         <div className="title">
                             <h4> Full Name </h4>
                             <input
-                              type="name"
                               className="profileForm"
-                              placeholder="Enter the organisation name"
+                              placeholder="Enter your name"
                               name="name"
-                              value={this.state.organisation}
                               onChange={this.handleChange}
                             />
                         </div>
@@ -62,19 +89,32 @@ export class EditProfile extends React.Component{
                     <hr />
                     <div className="card">
                         <div className="title">
-                            <h5>Age</h5>
+                            <h4>Age</h4>
+                            <input className='profileForm' type="number" min={0} max={10000} step={1} defaultValue={18} name = "age" onChange={this.handleChange}/>
                         </div>
                     </div>
                     <hr />
                     <div className="card">
                         <div className="title">
-                            <h5>Email</h5>
+                            <h4>Email</h4>
+                            <input
+                              className="profileForm"
+                              placeholder="Enter your email"
+                              name="email"
+                              onChange={this.handleChange}
+                            />
                         </div>
                     </div>
                     <hr />
                     <div className="card">
                         <div className="title">
-                            <h5>Phone</h5>
+                            <h4>Phone</h4>
+                            <input
+                              className="profileForm"
+                              placeholder="Enter your mobile number"
+                              name="contact"
+                              onChange={this.handleChange}
+                            />
                         </div>
                     </div>
                     <hr />

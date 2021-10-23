@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import {Link} from 'react-router-dom';
 
 export class Profile extends React.Component{
     
@@ -104,6 +104,9 @@ export class Profile extends React.Component{
                             {this.state.usertype == 'org' && <p>{data.Organization}</p>}
                             {this.state.usertype == 'vol' && <p>{data.address}</p>}
                             </div>
+                        </div>
+                        <div className="bb">
+                            <Link to='/editprofile' className="but">Edit</Link>
                         </div>
                     </div>
                 </div>

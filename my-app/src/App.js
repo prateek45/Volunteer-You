@@ -12,8 +12,7 @@ import OrganisationSignUp from './components/signup/OrganisationSignUp';
 import VolunteerSignUp from './components/signup/VolunteerSignUp';
 import event from './components/Event/event';
 import {addEvent} from './components/Event/addEvent';
-import { Profile } from "./components/Profile/index";
-
+import { Profile, EditProfile } from "./components/Profile/index";
 function App() {
 
   return (
@@ -31,6 +30,7 @@ function App() {
         <Route path='/event/:id' component={event}/>
         <Route path='/myevents' component={addEvent}/>
         <Route path='/profile' component={Profile}/>
+        <Route path='/editprofile' component={EditProfile}/>
       </Switch>
     </Router></>
   );
