@@ -49,7 +49,7 @@ class Organization_Official(models.Model):
 class Events(models.Model):
     organization = models.ForeignKey(Organization_Official,related_name = 'event',null=True, blank= False, on_delete=models.CASCADE)
     title = models.CharField(max_length=200,null = False)
-    photo = models.ImageField(gettext_lazy("Image"),default = "",upload_to = upload_to, null = True, blank = True)
+    photo = models.ImageField(gettext_lazy("Image"),default = "profile/unnamed.png",upload_to = upload_to)
     description = models.CharField(max_length=10000,null = False, blank= False)
     slots = models.PositiveIntegerField(default=10,validators=[MinValueValidator(1)], null=False)
     contact = models.CharField(max_length=1000,null = False, blank= False, default= "0000000000")
