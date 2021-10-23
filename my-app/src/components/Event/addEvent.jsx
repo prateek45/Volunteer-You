@@ -32,7 +32,7 @@ export class addEvent extends React.Component  {
     async componentDidMount(){
       console.log(localStorage.getItem('userID'));
       const id = localStorage.getItem('userID');
-      axios.get('/^api/organizations').then(res =>{
+      axios.get('/api/organizations').then(res =>{
         const results = res.data.results;
         console.log(results);
         for (var i in results) {
@@ -65,8 +65,9 @@ export class addEvent extends React.Component  {
     }
 
     changeImage(e) {
+      console.log(e.target.files)
       this.setState({
-          image: e.target.value
+          image: e.target.files
       })
     }
 
@@ -93,30 +94,31 @@ export class addEvent extends React.Component  {
       e.preventDefault();
       //Declare current username/pass as variables for ease of access.
       const title = this.state.title;
-      const numVol = this.state.numVol;
+      const numVol = parseInt(this.state.numVol);
       const date = this.state.date;
       const descr = this.state.descr;
-      const org = this.state.orgName;
+      const org = parseInt(this.state.orgName);
       const location = this.state.location;
       const contact = this.state.contact;
       const image = this.state.image;
       console.log(title)
-      console.log(numVol)
+      console.log(typeof(numVol))
       console.log(date)
       console.log(descr)
-      console.log(org)
+      console.log(typeof(org))
       console.log(location)
       console.log(contact)
       console.log(image)
       //Get all current volunteers
-      axios.post('/^api/events/', {
+      axios.post('/api/events/', {
         title: title,
         description: descr,
         organization: org,
         //date: date,
         slots: numVol,
         location: location,
-        contact: contact
+        contact: contact,
+        photo: image
       })
       .then(response => {
           console.log(response.data);
@@ -230,7 +232,7 @@ export class addEvent extends React.Component  {
                   <div>
                     <input
                       type="file"
-                      name="file"
+                      name="image"
                       id="upMultilImages"
                       multiple="multiple"
                       accept="image/*" 
