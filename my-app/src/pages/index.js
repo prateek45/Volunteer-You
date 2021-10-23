@@ -14,6 +14,7 @@ const Home = () => {
   useEffect(() => {
   axios.get('/api/events/').then(res => {
     //Use setCards to set cards equal to event data
+    console.log(res.data.results);
     setCards(res.data.results);   
     setPosts(res.data.count);  
     })  
@@ -25,7 +26,6 @@ const Home = () => {
     let link = '/api/events?page=' + pageNumber.toString();
     axios.get(link).then(res => {
       //Use setCards to set cards equal to event data
-      console.log(res)
       setCards(res.data.results);   
       setPosts(res.data.count); 
       })
@@ -56,6 +56,7 @@ const Home = () => {
               }} >
                 
               <EventCard 
+            image = {event.photo}
             additional={event.additional}
             title={event.title}
             description={event.description} 

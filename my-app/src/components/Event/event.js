@@ -19,13 +19,17 @@ export default function Event() {
     }, [eventID]);
     console.log(event);
     //Fill out attributes of event from event data.
+    const photo = event.photo;
     const title = event.title;
     const contact = event.contact;
     const location = event.location;
     const description = event.description;
     const slots = event.slots;
+    const image_Name = photo.split(/[/://]+/);
+    const imageDirectory = "/media/profile/" + image_Name[5];
     return(
         <div className="e">
+        <img src = {imageDirectory} alt = {"Event Image"} ></img>
         <h2 className='tit'>{title}</h2>
         <h4 className='contact'>Contact: {contact}</h4>
         <h4 className='loci'>Location: {location}</h4>

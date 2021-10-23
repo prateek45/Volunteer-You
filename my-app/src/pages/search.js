@@ -42,6 +42,7 @@ function EventResults()  {
           return(
               <EventCard 
               additional={events.additional}
+              image = {events.photo}
               title={events.title}
               description={events.description} 
               slots={events.slots}
