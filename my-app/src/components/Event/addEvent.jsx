@@ -33,7 +33,7 @@ export class addEvent extends React.Component  {
     async componentDidMount(){
       console.log(localStorage.getItem('userID'));
       const id = localStorage.getItem('userID');
-      axios.get('/^api/organizations').then(res =>{
+      axios.get('/api/organizations').then(res =>{
         const results = res.data.results;
         console.log(results);
         for (var i in results) {
@@ -66,8 +66,9 @@ export class addEvent extends React.Component  {
     }
 
     changeImage(e) {
+      console.log(e.target.files)
       this.setState({
-          image: e.target.value
+          image: e.target.files
       })
     }
 
@@ -88,38 +89,39 @@ export class addEvent extends React.Component  {
         location: e.target.value
       })
     }
-
     handleSubmit(e) {
       //Prevent default button actions.
       e.preventDefault();
       //Declare current username/pass as variables for ease of access.
       const title = this.state.title;
-      const numVol = this.state.numVol;
+      const numVol = parseInt(this.state.numVol);
       const date = this.state.date;
       const descr = this.state.descr;
-      const org = this.state.orgName;
+      const org = parseInt(this.state.orgName);
       const location = this.state.location;
       const contact = this.state.contact;
       const image = this.state.image;
+
       console.log(title)
-      console.log(numVol)
+      console.log(typeof(numVol))
       console.log(date)
       console.log(descr)
-      console.log(org)
+      console.log(typeof(org))
       console.log(location)
       console.log(contact)
       console.log(image)
-      //Get all current volunteers
-      axios.post('/^api/events/', {
-        title: title,
-        description: descr,
-        organization: org,
-        //date: date,
-        slots: numVol,
-        location: location,
-        contact: contact
-      })
-      .then(response => {
+
+      let formData = new FormData();
+      formData.append('title', title);
+      formData.append('slug', numVol);
+      formData.append('description', descr);
+      formData.append('organization', org);
+      formData.append('location', location);
+      formData.append('photo', image[0]);
+      formData.append('contact', contact);
+      
+      axios.post(`/api/events/`, formData
+      ).then(response => {
           console.log(response.data);
           this.setState({
             submitted: 1
@@ -213,17 +215,6 @@ export class addEvent extends React.Component  {
                 We recommend choosing <strong>landscape</strong> images for best
                 results.
               </p>
-              {/*<div className="margin-vertical">
-                <p />
-                We've noticed the image upload is taking a while, likely due to a
-                slow connection or large file size. Please be patient while it
-                uploads. If the problem persists please consider the options below:
-                <ul className="c-padding-horizontal2">
-                  <li>Uploading the images one by one</li>
-                  <li>Reducing the size of the images</li>
-                  <li>Trying another browser</li>
-                </ul>
-    </div>*/}
               <ul id="loading-files" />
               <div className="fileupload-container">
                 <div id="upload_btn" className="button2">
@@ -231,7 +222,7 @@ export class addEvent extends React.Component  {
                     <input
                       className='imgupd'
                       type="file"
-                      name="file"
+                      name="image"
                       id="upMultilImages"
                       multiple="multiple"
                       accept="image/*" 
