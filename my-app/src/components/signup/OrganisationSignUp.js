@@ -138,7 +138,7 @@ class OrganisationSignUp extends Component {
               id="password2"
               className="formFieldInput"
               placeholder="ReEnter your password"
-              name="password"
+              name="password2"
               value={this.state.password2}
               onChange={this.handleChange}
             />
