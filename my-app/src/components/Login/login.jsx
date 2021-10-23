@@ -1,7 +1,7 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
 import axios from "axios";
-
+import './style.css';
 export class Login extends React.Component{
     //State with variables for username, password, result of login and value
     //used to determine if error should be displayed.
@@ -40,7 +40,7 @@ export class Login extends React.Component{
     //A function that returns the data from an api depending on input, either
     //volunteer or organisation.
     getData (dataType) {
-        return axios.get('/api/' + dataType)
+        return axios.get('/^api/' + dataType)
         .then(response => {
             this.response = response.data
             return this.response
@@ -119,7 +119,7 @@ export class Login extends React.Component{
                 <form className="form" onSubmit = {this.handleLogin}>
                     <input type="text" required="required" placeholder="UserName" name="u" value = {this.state.username} onChange = {this.usernameChange}></input>  
                     <input type="password" required="required" placeholder="Password" name="p" value = {this.state.password} onChange = {this.passwordChange}></input>  
-                    <button className="but" method = 'post'>Login</button>
+                    <button className="but1" method = 'post'>Login</button>
                 </form>
                 {(this.state.logResult === 1 || this.state.logResult === 2) && 
                     <Redirect to={{
