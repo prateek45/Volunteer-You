@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {SearchBar} from '../components/Search/index';
 import axios from 'axios';
 import EventCard from'../components/Event/EventCard';
-
+import './search.css'
 //The function controlling what events are returned from a search.
 function EventResults()  {
   //Creates array of search term and sort type as array.
@@ -30,8 +30,11 @@ function EventResults()  {
     <div>
       {//Placeholder, describes status of search registered by app for easy viewing
         }
+      <div className='res'>
       <h1> You searched for {searchVal} sorted by {sortVal}</h1>
       <h1> Found {events.count} matching results </h1>
+      </div>
+      <div className='wrap'>
       <div className="wrapper">
       {//For every event with id in IDArr, list it's eventCard
         }
@@ -48,6 +51,7 @@ function EventResults()  {
           )}
         //If an event isn't in the search, return null.
         )}
+      </div>
       </div>
     </div>
   );
@@ -66,7 +70,6 @@ const SearchVanilla = () => {
       }}
     > 
       <SearchBar />   
-      <h1>Search Results</h1>
     </div>
   );
 };

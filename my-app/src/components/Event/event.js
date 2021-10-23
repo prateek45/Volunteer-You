@@ -28,9 +28,10 @@ export default function Event() {
         <div className="e">
         <h2 className='tit'>{title}</h2>
         <h4 className='contact'>Contact: {contact}</h4>
-        <h4 className='loc'>Location: {location}</h4>
+        <h4 className='loci'>Location: {location}</h4>
         <p className='des'>{description}</p>
         <h4 className='slot'>Slots: {slots} </h4>
+        <button className="apbtn" type = 'submit'>Apply</button>
     </div>
     )
 };
