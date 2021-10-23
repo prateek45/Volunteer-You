@@ -50,7 +50,7 @@ class Events(models.Model):
     slots = models.PositiveIntegerField(default=10,validators=[MinValueValidator(1)], null=False)
     contact = models.CharField(max_length=1000,null = False, blank= False, default= "0000000000")
     location = models.CharField(max_length=10000,null = False, blank= False)
-    roster = models.ForeignKey(Volunteer, on_delete=models.SET_NULL, null= True)
+    roster = models.ManyToManyField(Volunteer, null= True, related_name='events')
     date_created = models.DateTimeField(auto_now_add=True, null=False, blank="False")
     
     def __str__(self):

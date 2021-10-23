@@ -4,4 +4,14 @@ from .models import *
 
 admin.site.register(Volunteer)
 admin.site.register(Organization_Official)
-admin.site.register(Events)
+
+class VolInLine(admin.TabularInline):
+	model = Events.roster.through
+
+@admin.register(Events)
+class EventAdmin(admin.ModelAdmin):
+	inlines = (VolInLine,)
+	exclude = ('roster',)
+
+
+

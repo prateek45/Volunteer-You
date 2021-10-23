@@ -36,9 +36,10 @@ export class Profile extends React.Component{
             })
             axios.get('^api/events').then(res => {
                 const data = res.data
+                console.log(data)
                 var events = []
                 for (let i = 0; i < data.count; i++) {
-                    if (data.results[i].organization == userID) {
+                    if (data.results[i].roster == userID) {
                         events.push(data.results[i])
                         this.setState({
                             events: events
@@ -84,7 +85,7 @@ export class Profile extends React.Component{
 
     render(){
         console.log(this.state.data)
-        //console.log(this.state.events)
+        console.log(this.state.events)
         const events = this.state.events
         const data = this.state.data
         return(
@@ -97,7 +98,8 @@ export class Profile extends React.Component{
                             <div className="mt-3">
                             <h4>{data.name}</h4>
                             <p>{data.profession}</p>
-                            <p>Bay Area, San Francisco, CA</p>
+                            {this.state.usertype == 'org' && <p>{data.Organization}</p>}
+                            {this.state.usertype == 'vol' && <p>{data.address}</p>}
                             </div>
                         </div>
                     </div>
@@ -113,7 +115,7 @@ export class Profile extends React.Component{
                             <h5>Full Name</h5>
                         </div>
                         <div className="inf">
-                            id
+                            {data.name}
                         </div>
                     </div>
 
@@ -123,7 +125,7 @@ export class Profile extends React.Component{
                             <h5>Age</h5>
                         </div>
                         <div className="inf">
-                            23
+                            {data.age}
                         </div>
                     </div>
                     <hr />
@@ -141,7 +143,7 @@ export class Profile extends React.Component{
                             <h5>Phone</h5>
                         </div>
                         <div className="inf">
-                            0416811238
+                            {data.contact}
                         </div>
                     </div>
                     <hr />
