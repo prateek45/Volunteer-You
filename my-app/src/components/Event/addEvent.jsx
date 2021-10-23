@@ -89,7 +89,6 @@ export class addEvent extends React.Component  {
         location: e.target.value
       })
     }
-
     handleSubmit(e) {
       //Prevent default button actions.
       e.preventDefault();
@@ -102,6 +101,7 @@ export class addEvent extends React.Component  {
       const location = this.state.location;
       const contact = this.state.contact;
       const image = this.state.image;
+
       console.log(title)
       console.log(typeof(numVol))
       console.log(date)
@@ -110,18 +110,18 @@ export class addEvent extends React.Component  {
       console.log(location)
       console.log(contact)
       console.log(image)
-      //Get all current volunteers
-      axios.post('/api/events/', {
-        title: title,
-        description: descr,
-        organization: org,
-        //date: date,
-        slots: numVol,
-        location: location,
-        contact: contact,
-        photo: image
-      })
-      .then(response => {
+
+      let formData = new FormData();
+      formData.append('title', title);
+      formData.append('slug', numVol);
+      formData.append('description', descr);
+      formData.append('organization', org);
+      formData.append('location', location);
+      formData.append('photo', image[0]);
+      formData.append('contact', contact);
+      
+      axios.post(`/api/events/`, formData
+      ).then(response => {
           console.log(response.data);
           this.setState({
             submitted: 1
@@ -215,17 +215,6 @@ export class addEvent extends React.Component  {
                 We recommend choosing <strong>landscape</strong> images for best
                 results.
               </p>
-              {/*<div className="margin-vertical">
-                <p />
-                We've noticed the image upload is taking a while, likely due to a
-                slow connection or large file size. Please be patient while it
-                uploads. If the problem persists please consider the options below:
-                <ul className="c-padding-horizontal2">
-                  <li>Uploading the images one by one</li>
-                  <li>Reducing the size of the images</li>
-                  <li>Trying another browser</li>
-                </ul>
-    </div>*/}
               <ul id="loading-files" />
               <div className="fileupload-container">
                 <div id="upload_btn" className="button2">
