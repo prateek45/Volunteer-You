@@ -30,6 +30,7 @@ function App() {
         <Route path='/sign-up-org' component={OrganisationSignUp} />
         <Route path='/event/:id' component={event}/>
         <Route path='/myevents' component={addEvent}/>
+        <Route path='/profile' component={Profile}/>
       </Switch>
     </Router></>
   );

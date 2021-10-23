@@ -40,7 +40,7 @@ class VolunteerSignUp extends Component {
     const subEmail = this.state.email;
     console.log(subPassword);
     if (subPassword === subPassword2) {
-      axios.post('/^api/volunteers/', {
+      axios.post('/api/volunteers/', {
         name: subUsername,
         password: subPassword,
         email: subEmail,
