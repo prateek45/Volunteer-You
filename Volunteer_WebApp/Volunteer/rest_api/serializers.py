@@ -16,6 +16,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
         
 
 class EventsSerializer(serializers.ModelSerializer):
+    roster = serializers.StringRelatedField(many=True)
     class Meta:
         model = Events
         fields = ('id','organization', 'title', 'photo', 'description', 'slots', 'roster', 'contact', 'location','date_created')
