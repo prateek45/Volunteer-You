@@ -148,14 +148,7 @@ export class Profile extends React.Component{
                    
                 </div>
             </div>
-            <div className="user">
-                <div className="card-body">
-                    <div className="fav">
-                        <h4>{this.state.usertype == 'org' && 'Organisation'}
-                        {this.state.usertype == 'vol' && 'Volunteer'} Experience:</h4>
-                    </div>
-                </div>
-            </div>
+            
             <div className="user">
                 <div className="card-body">
                     <div className="fav">
