@@ -17,6 +17,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
         super(OrganizationSerializer, self).__init__(*args, **kwargs)
         if self.context['request'].method == "PUT":
             self.fields.pop('password')
+            self.fields.pop('Organization')
     Organization_user = serializers.PrimaryKeyRelatedField(read_only=True,)
 
     class Meta:

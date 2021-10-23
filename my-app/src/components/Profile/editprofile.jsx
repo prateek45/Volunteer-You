@@ -57,7 +57,15 @@ export class EditProfile extends React.Component{
         formData.append('Profile_photo', image[0]);
 
         if (userType == 'vol') {
-            axios.post('/api/volunteers/' + userID + '/', formData)
+            axios.put('/api/volunteers/' + userID + '/', formData)
+            .then(res=> {
+                console.log(res)
+            })
+            .catch(error=> {
+                console.log(error.response.data)
+            })
+        } else if (userType == 'org') {
+            axios.put('/api/organizations/' + userID + '/', formData)
             .then(res=> {
                 console.log(res)
             })
@@ -65,6 +73,7 @@ export class EditProfile extends React.Component{
                 console.log(error.response.data)
             })
         }
+        
     }
 
   

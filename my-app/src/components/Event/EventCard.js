@@ -25,6 +25,6 @@ export default function EventCard(
         <h4>Slots: {slots} </h4>
         <Link className='apply' to={{
                             pathname: '/event/'+id,                            
-                        }}>Apply</Link>
+                        }}>View</Link>
     </div>
 )}
