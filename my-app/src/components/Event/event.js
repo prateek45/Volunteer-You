@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import './event.css';
 import axios from "axios";
 
-
 export default function Event() {
     //Get the id of the event from the url
     const eventID = window.location.href.split('/')[4];
@@ -20,6 +19,24 @@ export default function Event() {
     })  
     }, []);
     console.log(event);
+
+    function volApply(e) {
+        e.preventDefault();
+        const roster = event.roster;
+        const userID = localStorage.getItem('userID');
+        roster.push(userID);
+        console.log(userID);
+        console.log(roster);
+        let form = new FormData();
+        form.append('roster', userID);
+        console.log(...form);
+        axios.put('/api/events/' + eventID + '/', form).then(res => {
+            console.log(res);
+        }).catch(error => {
+            console.log(error.response.data)
+        })
+    }
+
     //Fill out attributes of event from event data.
     if (isLoading) {
         return("Loading...")
@@ -40,7 +57,7 @@ export default function Event() {
             <h4 className='loci'>Location: {location}</h4>
             <p className='des'>{description}</p>
             <h4 className='slot'>Slots: {slots} </h4>
-            <button className="apbtn" type = 'submit'>Apply</button>
+            <button className="apbtn" type = 'submit' onClick = {volApply}>Apply</button>
         </div>
         )
     }

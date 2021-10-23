@@ -23,9 +23,28 @@ class OrganizationSerializer(serializers.ModelSerializer):
         model = Organization_Official
         fields = ('id', 'Organization_user', 'name', 'profession', 'Organization', 'email', 'Profile_photo', 'password', 'age', 'contact')
         
+class RosterSerializer(serializers.StringRelatedField):
+    def to_internal_value(self, value):
+        return value
+    class Meta:
+        model = Volunteer
+        fields = ('id',)
 
 class EventsSerializer(serializers.ModelSerializer):
-    roster = serializers.StringRelatedField(many=True)
+    def __init__(self, *args, **kwargs):
+        super(EventsSerializer, self).__init__(*args, **kwargs)
+        if self.context['request'].method == "PUT":
+            self.fields.pop('description'),
+            self.fields.pop('location'),
+            self.fields.pop('title')
+
+    roster = RosterSerializer(many=True)
+
+    def update(self, instance, validated_data):
+        validated_data.get('roster')
+        instance.roster.add(validated_data.get('roster')[0])
+        return instance
+
     class Meta:
         model = Events
         fields = ('id','organization', 'title', 'photo', 'description', 'slots', 'roster', 'contact', 'location','date_created')
