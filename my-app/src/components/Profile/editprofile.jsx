@@ -9,22 +9,29 @@ export class EditProfile extends React.Component{
         age: 18,
         email: '',
         contact: '',
+        image: '',
         userType: localStorage.getItem('userType'),
         userID: localStorage.getItem('userID')
     }
 
     constructor(props){
         super(props);
-
+        
         this.handleChange = this.handleChange.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
     }
 
     handleChange(event) {
+        console.log(event);
         let target = event.target;
-        let value = target.type === "checkbox" ? target.checked : target.value;
+        let value;
         let name = target.name;
-
+        if (target.type === "file") {
+            value = target.files
+        } else {
+            value = target.type === "checkbox" ? target.checked : target.value;
+        }
+        
         this.setState({
           [name]: value
         });
@@ -33,19 +40,25 @@ export class EditProfile extends React.Component{
     handleEdit(e) {
         e.preventDefault();
         console.log(this.state);
+        
         const name = this.state.name;
         const age = this.state.age;
         const email = this.state.email
         const contact = this.state.contact;
         const userType = this.state.userType;
         const userID = this.state.userID;
+        const image = this.state.image;
+
+        let formData = new FormData();
+        formData.append('name', name);
+        formData.append('age', age);
+        formData.append('email', email);
+        formData.append('contact', contact);
+        formData.append('Profile_photo', image[0]);
+
         if (userType == 'vol') {
-            axios.put('/api/volunteers/' + userID + '/', {
-                name: name,
-                age: age,
-                email: email,
-                contact: contact
-            }).then(res=> {
+            axios.post('/api/volunteers/' + userID + '/', formData)
+            .then(res=> {
                 console.log(res)
             })
             .catch(error=> {
@@ -54,6 +67,7 @@ export class EditProfile extends React.Component{
         }
     }
 
+  
     render(){
 
         return(
@@ -63,6 +77,21 @@ export class EditProfile extends React.Component{
                     <div className="userB">
                         <div className="d-flex flex-column align-items-center text-center">
                             <div className="mt-3">
+                                <div className="card-body">
+                                    <div className="card">
+                                        <div className="Image">
+                                            <h4> Profile Image </h4>
+                                            <img src = {""} alt = {"profile_image"}></img>
+                                        </div>
+                                        <input
+                                            type="file"
+                                            name="image"
+                                            id="upMultilImages"
+                                            multiple="multiple"
+                                            accept="image/*" 
+                                            onChange = {this.handleChange}/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="bb">
