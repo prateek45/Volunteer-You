@@ -36,14 +36,17 @@ export class Profile extends React.Component{
             })
             axios.get('^api/events').then(res => {
                 const data = res.data
-                console.log(data)
                 var events = []
                 for (let i = 0; i < data.count; i++) {
-                    if (data.results[i].roster == userID) {
-                        events.push(data.results[i])
-                        this.setState({
-                            events: events
-                        })    
+                    const rosterLen = data.results[i].roster.length
+                    console.log(rosterLen)
+                    for (let j = 0; j < data.count; j++) {
+                        if (data.results[i].roster[j] == userID) {
+                            events.push(data.results[i])
+                            this.setState({
+                                events: events
+                            })    
+                        }
                     }
                 }              
             })
