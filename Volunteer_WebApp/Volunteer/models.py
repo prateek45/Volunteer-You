@@ -14,6 +14,20 @@ class User(AbstractUser):
     
 # Create your models here.
 
+class Volunteer(models.Model):
+    Volunteer_user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name= 'volunteer', null= True, blank = True, on_delete= models.CASCADE)
+    name = models.CharField(max_length=500,null = False)
+    age =  models.PositiveIntegerField(default=10,validators=[MinValueValidator(5)], null=False)
+    profession = models.CharField(max_length=500, default="Volunteer", null=False)
+    email = models.EmailField(unique=True,null=False)
+    Profile_photo = models.ImageField(default = "", null = True, blank = True)
+    address = models.CharField(max_length=500,null = False, default="Test")
+    password = models.CharField(max_length=500,null = False)
+    contact = models.CharField(max_length=1000,null = False, blank= False, default="0000000000")
+
+    def __str__(self):
+	    return self.name
+
 class Organization_Official(models.Model):
     Organization_user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name= 'Organization_Official', null= True, blank = True, on_delete= models.CASCADE)
     name = models.CharField(max_length=200,null = False)
@@ -23,7 +37,7 @@ class Organization_Official(models.Model):
     email = models.EmailField(unique=True,null=False)
     Profile_photo = models.ImageField(default = "", null = True, blank = True)
     password = models.CharField(max_length=500,null = False)
-    contact = models.CharField(max_length=1000,null = False, blank= False)
+    contact = models.CharField(max_length=1000,null = False, blank= False,default="0000000000")
 
     def __str__(self):
 	    return self.name
@@ -34,24 +48,10 @@ class Events(models.Model):
     photo = models.ImageField(default = "", null = True, blank = True)
     description = models.CharField(max_length=10000,null = False, blank= False)
     slots = models.PositiveIntegerField(default=10,validators=[MinValueValidator(1)], null=False)
-    contact = models.CharField(max_length=1000,null = False, blank= False)
+    contact = models.CharField(max_length=1000,null = False, blank= False, default= "0000000000")
     location = models.CharField(max_length=10000,null = False, blank= False)
-    date_created = models.DateTimeField(auto_now_add=True)
+    roster = models.ForeignKey(Volunteer, on_delete=models.SET_NULL, null= True)
+    date_created = models.DateTimeField(auto_now_add=True, null=False, blank="False")
     
     def __str__(self):
         return self.title
-
-class Volunteer(models.Model):
-    Volunteer_user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name= 'volunteer', null= True, blank = True, on_delete= models.CASCADE)
-    name = models.CharField(max_length=500,null = False)
-    age =  models.PositiveIntegerField(default=10,validators=[MinValueValidator(5)], null=False)
-    profession = models.CharField(max_length=500, default="Volunteer", null=False)
-    email = models.EmailField(unique=True,null=False)
-    Profile_photo = models.ImageField(default = "", null = True, blank = True)
-    address = models.CharField(max_length=500,null = False, default="Test")
-    password = models.CharField(max_length=500,null = False)
-    contact = models.CharField(max_length=1000,null = False, blank= False)
-    event = models.ForeignKey(Events,on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-	    return self.name
