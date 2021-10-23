@@ -37,12 +37,3 @@ class EventsView(viewsets.ModelViewSet):
     ordering = ['-date_created']
     parser_classes = [MultiPartParser,FormParser]
 
-    def post(self,request,format = None):
-        print(request.data)
-        serializer = EventsSerializer(data=request.data)
-        if serializer.is_valid():
-            serializers.save()
-            return Response(serializer.data, status = status.HTTP_200_OK)
-        else:
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-
