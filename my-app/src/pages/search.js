@@ -18,7 +18,7 @@ function EventResults()  {
   const [cards, setCards] = useState([]);   
   
   useEffect(() => {
-    let link = '/^api/events?search='+searchVal+'&ordering='+sortVal;
+    let link = '/api/events?search='+searchVal+'&ordering='+sortVal;
     axios.get(link).then(res => {
       //Use setCards to set cards equal to event data
       setEvents(res.data);   

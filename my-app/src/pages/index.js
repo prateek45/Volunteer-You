@@ -12,7 +12,7 @@ const Home = () => {
   const [postLength,setPosts] = useState([])
   //Send get request for all events from api
   useEffect(() => {
-  axios.get('/^api/events/').then(res => {
+  axios.get('/api/events/').then(res => {
     //Use setCards to set cards equal to event data
     setCards(res.data.results);   
     setPosts(res.data.count);  
@@ -22,7 +22,7 @@ const Home = () => {
   //Get Next page Data
   function nextPageEvents(pageNumber) {
     console.log(pageNumber);
-    let link = '/^api/events?page=' + pageNumber.toString();
+    let link = '/api/events?page=' + pageNumber.toString();
     axios.get(link).then(res => {
       //Use setCards to set cards equal to event data
       console.log(res)
