@@ -160,9 +160,10 @@ export class Profile extends React.Component{
                         {this.state.usertype == 'org' && <h4>Events I'm Managing</h4>}
                         {this.state.usertype == 'vol' && <h4>Events I'm Participating In</h4>}
                         {events.map((event) => (
+
                             <div id = "eventCard">
                                 <h5> <strong>Event:</strong> {event.title} </h5>
-                                <h5> <strong>Current Roster:</strong> {event.roster} </h5>
+                                <h5> <strong>Current Roster:</strong> {event.roster.join(", ")} </h5>
                                 <h5> <strong>Remaining Slots:</strong> {event.slots} </h5>
                                 <span className="loc">Location: {event.location}</span>
                                 <hr />
