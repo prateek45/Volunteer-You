@@ -15,6 +15,7 @@ class VolunteerView(viewsets.ModelViewSet):
     """
     serializer_class = VolunteerSerializer
     queryset = Volunteer.objects.all()
+    parser_classes = [MultiPartParser,FormParser]
 
 
 class OrganizationView(viewsets.ModelViewSet):
@@ -23,6 +24,7 @@ class OrganizationView(viewsets.ModelViewSet):
     """
     serializer_class = OrganizationSerializer
     queryset = Organization_Official.objects.all()
+    parser_classes = [MultiPartParser,FormParser]
 
 
 
