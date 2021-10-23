@@ -8,7 +8,7 @@ export class Profile extends React.Component{
         usertype: localStorage.getItem('userType'),
         userID: localStorage.getItem('userID'),
         data: [],
-        events: []
+        events: [],
     }
 
     constructor(props){
@@ -23,6 +23,7 @@ export class Profile extends React.Component{
         if (usertype == 'vol') {
             axios.get('api/volunteers').then(res => {
                 const data = res.data
+                {console.log(data)}
                 for (let i = 0; i < data.count; i++) {
                     if (data.results[i].id == userID) {
                         this.setState({
@@ -91,13 +92,17 @@ export class Profile extends React.Component{
         console.log(this.state.events)
         const events = this.state.events
         const data = this.state.data
+        //const image = data.Profile_photo
+        //const image_Name = image.split(/[/://]+/)
+        //const imageDirectory = "/media/profile/" + image_Name[5];
+
         return(
         <div className="box">
             <div className="box1">
                 <div className="user1">
                     <div className="userB">
                         <div className="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" width="150"></img>
+                            <img src={""} alt="Admin" className="rounded-circle" width="150"></img>
                             <div className="mt-3">
                             <h4>{data.name}</h4>
                             <p>{data.profession}</p>
