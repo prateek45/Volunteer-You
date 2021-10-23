@@ -21,7 +21,7 @@ export class Profile extends React.Component{
         const usertype = this.state.usertype
         const userID = this.state.userID
         if (usertype == 'vol') {
-            axios.get('^api/volunteers').then(res => {
+            axios.get('api/volunteers').then(res => {
                 const data = res.data
                 for (let i = 0; i < data.count; i++) {
                     if (data.results[i].id == userID) {
@@ -34,7 +34,7 @@ export class Profile extends React.Component{
             .catch(error => {
                 console.log(error);
             })
-            axios.get('^api/events').then(res => {
+            axios.get('api/events').then(res => {
                 const data = res.data
                 var events = []
                 for (let i = 0; i < data.count; i++) {
@@ -54,7 +54,7 @@ export class Profile extends React.Component{
                 console.log(error);
             })
         } else if (usertype == 'org') {
-            axios.get('^api/organizations').then(res => {
+            axios.get('api/organizations').then(res => {
                 const data = res.data
                 for (let i = 0; i < data.count; i++) {
                     if (data.results[i].id == userID) {
@@ -67,7 +67,7 @@ export class Profile extends React.Component{
             .catch(error => {
                 console.log(error);
             })
-            axios.get('^api/events').then(res => {
+            axios.get('api/events').then(res => {
                 const data = res.data
                 var events = []
                 for (let i = 0; i < data.count; i++) {

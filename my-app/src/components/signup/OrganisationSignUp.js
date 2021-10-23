@@ -40,7 +40,7 @@ class OrganisationSignUp extends Component {
     const subEmail = this.state.email;
     const subOrg = this.state.organisation;
     if (subPassword === subPassword2) {
-      axios.post('/^api/organizations/', {
+      axios.post('/api/organizations/', {
         name: subUsername,
         password: subPassword,
         email: subEmail,

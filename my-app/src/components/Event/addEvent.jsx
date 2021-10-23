@@ -32,7 +32,7 @@ export class addEvent extends React.Component  {
     async componentDidMount(){
       console.log(localStorage.getItem('userID'));
       const id = localStorage.getItem('userID');
-      axios.get('/^api/organizations').then(res =>{
+      axios.get('/api/organizations').then(res =>{
         const results = res.data.results;
         console.log(results);
         for (var i in results) {
@@ -109,7 +109,7 @@ export class addEvent extends React.Component  {
       console.log(contact)
       console.log(image)
       //Get all current volunteers
-      axios.post('/^api/events/', {
+      axios.post('/api/events/', {
         title: title,
         description: descr,
         organization: org,

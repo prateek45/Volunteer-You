@@ -11,7 +11,7 @@ export default function Event() {
 
     //Send a get request for the events
     useEffect(() => {
-    axios.get('/^api/events').then(res => {
+    axios.get('/api/events').then(res => {
         //Use setEvent to set event to be the event with id matching the id in url.
         const results = res.data.results;        
         setEvent(results.filter(event => event.id == eventID)[0]);     

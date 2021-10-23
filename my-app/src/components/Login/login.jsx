@@ -40,7 +40,7 @@ export class Login extends React.Component{
     //A function that returns the data from an api depending on input, either
     //volunteer or organisation.
     getData (dataType) {
-        return axios.get('/^api/' + dataType)
+        return axios.get('/api/' + dataType)
         .then(response => {
             this.response = response.data
             return this.response
