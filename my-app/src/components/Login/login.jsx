@@ -79,6 +79,11 @@ export class Login extends React.Component{
                 dispError: this.state.dispError + 1
             })
         })
+        .catch(error => {
+            this.setState({
+                dispError: this.state.dispError + 1
+            })
+        })
         //Same as previous section but for organisations.
         this.getData("organizations").then(data => {
             const org = data;
@@ -91,6 +96,11 @@ export class Login extends React.Component{
                         })
                     }
                 }
+            this.setState({
+                dispError: this.state.dispError + 1
+            })
+        })
+        .catch(error => {
             this.setState({
                 dispError: this.state.dispError + 1
             })
