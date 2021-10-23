@@ -5,6 +5,10 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from django.utils.translation import gettext_lazy
+
+def upload_to(instance, filename):
+  return 'profile/{filename}'.format(filename = filename)
 
 class User(AbstractUser):
   #Boolean fields to select the type of account.
@@ -20,7 +24,7 @@ class Volunteer(models.Model):
     age =  models.PositiveIntegerField(default=10,validators=[MinValueValidator(5)], null=False)
     profession = models.CharField(max_length=500, default="Volunteer", null=False)
     email = models.EmailField(unique=True,null=False)
-    Profile_photo = models.ImageField(default = "", null = True, blank = True)
+    Profile_photo = models.ImageField(gettext_lazy("Image"), upload_to = upload_to, default = 'profile/avatar.jpg')
     address = models.CharField(max_length=500,null = False, default="Test")
     password = models.CharField(max_length=500,null = False)
     contact = models.CharField(max_length=1000,null = False, blank= False, default="0000000000")
@@ -35,7 +39,7 @@ class Organization_Official(models.Model):
     profession = models.CharField(max_length=500, default="Organization Official", null=False)
     Organization = models.CharField(max_length=200,null = False)
     email = models.EmailField(unique=True,null=False)
-    Profile_photo = models.ImageField(default = "", null = True, blank = True)
+    Profile_photo = models.ImageField(gettext_lazy("Image"),upload_to = upload_to, default = 'profile/avatar.jpg')
     password = models.CharField(max_length=500,null = False)
     contact = models.CharField(max_length=1000,null = False, blank= False,default="0000000000")
 
@@ -45,7 +49,7 @@ class Organization_Official(models.Model):
 class Events(models.Model):
     organization = models.ForeignKey(Organization_Official,related_name = 'event',null=True, blank= False, on_delete=models.CASCADE)
     title = models.CharField(max_length=200,null = False)
-    photo = models.ImageField(default = "", null = True, blank = True)
+    photo = models.ImageField(gettext_lazy("Image"),default = "",upload_to = upload_to, null = True, blank = True)
     description = models.CharField(max_length=10000,null = False, blank= False)
     slots = models.PositiveIntegerField(default=10,validators=[MinValueValidator(1)], null=False)
     contact = models.CharField(max_length=1000,null = False, blank= False, default= "0000000000")
