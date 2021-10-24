@@ -24,11 +24,12 @@ export class Profile extends React.Component{
         if (usertype == 'vol') {
             axios.get('api/volunteers').then(res => {
                 const data = res.data
-                {console.log(data)}
+                console.log(data)
                 for (let i = 0; i < data.count; i++) {
                     if (data.results[i].id == userID) {
                         this.setState({
-                            data: data.results[i]
+                            data: data.results[i],
+                            isLoading: false
                         })
                     }
                 }
@@ -41,13 +42,13 @@ export class Profile extends React.Component{
                 var events = []
                 for (let i = 0; i < data.count; i++) {
                     const rosterLen = data.results[i].roster.length
-                    console.log(rosterLen)
+                    console.log(userID)
+                    console.log(data.results)
                     for (let j = 0; j < data.count; j++) {
-                        if (data.results[i].roster[j] == userID) {
+                        if (data.results[i].roster[j] == localStorage.getItem('userName')) {
                             events.push(data.results[i])
                             this.setState({
-                                events: events,
-                                isLoading: false
+                                events: events
                             })    
                         }
                     }
@@ -95,15 +96,22 @@ export class Profile extends React.Component{
             return("Loading...");
         }
         else {
-            console.log(this.state.data)
-            console.log(this.state.events)
+            console.log(this.state)
             const events = this.state.events
 
             const data = this.state.data
+            console.log(data);
             const photo = data.Profile_photo;
-            const image_Name = photo.split(/[/://]+/);
-            const imageDirectory = "/media/profile/" + image_Name[5];
+            var imageDirectory = '';
+            if (photo == null) {
+                imageDirectory = "/media/profile/default.png"
+            }
+            else {
+                const image_Name = photo.split(/[/://]+/);
+                imageDirectory = "/media/profile/" + image_Name[5];
+            }
             console.log(imageDirectory)
+            console.log(events)
             //const image = data.Profile_photo
             //const image_Name = image.split(/[/://]+/)
             //const imageDirectory = "/media/profile/" + image_Name[5];

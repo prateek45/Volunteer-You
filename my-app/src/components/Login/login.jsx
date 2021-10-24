@@ -68,6 +68,7 @@ export class Login extends React.Component{
                     //If so, write their unique userid and usertype (vol in this case) to localStorage
                     localStorage.setItem('userID', vol.results[i].id);
                     localStorage.setItem('userType', 'vol');  
+                    localStorage.setItem('userName', vol.results[i].name);
                     //Set logResult to indicate successful login.
                     this.setState({
                         logResult: 1

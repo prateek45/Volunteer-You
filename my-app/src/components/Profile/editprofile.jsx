@@ -10,8 +10,10 @@ export class EditProfile extends React.Component{
         email: '',
         contact: '',
         image: '',
+        user: '',
         userType: localStorage.getItem('userType'),
-        userID: localStorage.getItem('userID')
+        userID: localStorage.getItem('userID'),
+        isLoading: true
     }
 
     constructor(props){
@@ -19,6 +21,38 @@ export class EditProfile extends React.Component{
         
         this.handleChange = this.handleChange.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+    }
+
+    async componentDidMount() {
+        const id = this.state.userID;
+        const userType = this.state.userType;
+        if (userType == 'org') {
+            axios.get('/api/organizations').then(res =>{
+                const data = res.data.results.filter(event => event.id == id)[0]
+                this.setState({
+                    user: data,
+                    name: data.name,
+                    email: data.email,
+                    age: data.age,
+                    contact: data.contact,
+                    Profile_photo: data.Profile_photo,
+                    isLoading: false
+                })
+            })
+        } else{
+            axios.get('/api/volunteers').then(res =>{
+                const data = res.data.results.filter(event => event.id == id)[0]
+                this.setState({
+                    user: data,
+                    name: data.name,
+                    email: data.email,
+                    age: data.age,
+                    contact: data.contact,
+                    Profile_photo: data.Profile_photo,
+                    isLoading: false
+                })
+            })
+        }
     }
 
     handleChange(event) {
@@ -78,92 +112,103 @@ export class EditProfile extends React.Component{
 
   
     render(){
-
-        return(
-        <div className="box">
-            <div className="box1">
-                <div className="user1">
-                    <div className="userB">
-                        <div className="d-flex flex-column align-items-center text-center">
-                            <div className="mt-3">
-                                <div className="card-body">
-                                    <div className="card">
-                                        <div className="Image">
-                                            <h4> Profile Image </h4>
-                                            <img src = {""} alt = {"profile_image"}></img>
+        if (this.state.isLoading) {
+            return("Loading");
+        }
+        else {
+            const photo = this.state.Profile_photo;
+            var imageDirectory = '';
+            if (photo == null) {
+                imageDirectory = "/media/profile/default.png"
+            } else {
+                const image_Name = photo.split(/[/://]+/);
+                const imageDirectory = "/media/profile/" + image_Name[5];
+            }
+            return(
+            <div className="box">
+                <div className="box1">
+                    <div className="user1">
+                        <div className="userB">
+                            <div className="d-flex flex-column align-items-center text-center">
+                                <div className="mt-3">
+                                    <div className="card-body">
+                                        <div className="card">
+                                            <div id = 'ImageContainer'>
+                                                <h4> Profile Image </h4>
+                                                <img  className="Image" name = "Profile_photo" src = {imageDirectory} alt = {"profile_image"} onChange = {this.handleChange}></img>
+                                            </div>
+                                            <input
+                                                type="file"
+                                                name="image"
+                                                multiple="multiple"
+                                                accept="image/*" 
+                                                onChange = {this.handleChange}/>
                                         </div>
-                                        <input
-                                            type="file"
-                                            name="image"
-                                            id="upMultilImages"
-                                            multiple="multiple"
-                                            accept="image/*" 
-                                            onChange = {this.handleChange}/>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="bb">
-                            <Link to='/profile' className="but">Cancel Changes</Link>
-                            <a className="but" onClick = {this.handleEdit} >Confirm Changes</a>
+                            <div className="bb">
+                                <Link to='/profile' className="but">Cancel Changes</Link>
+                                <a className="but" onClick = {this.handleEdit} >Confirm Changes</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="box2">
-            <div className="user">
-                <div className="card-body">
-                    <div className="card">
-                        <div className="title">
-                            <h4> Full Name </h4>
-                            <input
-                              className="profileForm"
-                              placeholder="Enter your name"
-                              name="name"
-                              onChange={this.handleChange}
-                            />
+                <div className="box2">
+                <div className="user">
+                    <div className="card-body">
+                        <div className="card">
+                            <div className="title">
+                                <h4> Full Name </h4>
+                                <input
+                                  className="profileForm"
+                                  placeholder={this.state.name}
+                                  name="name"
+                                  onChange={this.handleChange}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <hr />
-                    <div className="card">
-                        <div className="title">
-                            <h4>Age</h4>
-                            <input className='profileForm' type="number" min={0} max={10000} step={1} defaultValue={18} name = "age" onChange={this.handleChange}/>
+                        <hr />
+                        <div className="card">
+                            <div className="title">
+                                <h4>Age</h4>
+                                <input className='profileForm' type="number" min={0} max={10000} step={1} defaultValue={this.state.age} name = "age" onChange={this.handleChange}/>
+                            </div>
                         </div>
-                    </div>
-                    <hr />
-                    <div className="card">
-                        <div className="title">
-                            <h4>Email</h4>
-                            <input
-                              className="profileForm"
-                              placeholder="Enter your email"
-                              name="email"
-                              onChange={this.handleChange}
-                            />
+                        <hr />
+                        <div className="card">
+                            <div className="title">
+                                <h4>Email</h4>
+                                <input
+                                  className="profileForm"
+                                  placeholder={this.state.email}
+                                  name="email"
+                                  onChange={this.handleChange}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <hr />
-                    <div className="card">
-                        <div className="title">
-                            <h4>Phone</h4>
-                            <input
-                              className="profileForm"
-                              placeholder="Enter your mobile number"
-                              name="contact"
-                              onChange={this.handleChange}
-                            />
+                        <hr />
+                        <div className="card">
+                            <div className="title">
+                                <h4>Phone</h4>
+                                <input
+                                  className="profileForm"
+                                  placeholder={this.state.contact}
+                                  name="contact"
+                                  onChange={this.handleChange}
+                                />
+                            </div>
                         </div>
+                        <hr />
+                       
                     </div>
-                    <hr />
-                   
                 </div>
+                
+                
             </div>
-            
-            
-        </div>
-        </div>
-        )}
+            </div>
+            )}
+        }
 
 }
 
