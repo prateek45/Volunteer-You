@@ -9,6 +9,7 @@ export class Profile extends React.Component{
         userID: localStorage.getItem('userID'),
         data: [],
         events: [],
+        isLoading: true
     }
 
     constructor(props){
@@ -45,7 +46,8 @@ export class Profile extends React.Component{
                         if (data.results[i].roster[j] == userID) {
                             events.push(data.results[i])
                             this.setState({
-                                events: events
+                                events: events,
+                                isLoading: false
                             })    
                         }
                     }
@@ -75,7 +77,8 @@ export class Profile extends React.Component{
                     if (data.results[i].organization == userID) {
                         events.push(data.results[i])
                         this.setState({
-                            events: events
+                            events: events,
+                            isLoading: false
                         })    
                     }
                 }
@@ -88,102 +91,112 @@ export class Profile extends React.Component{
     }
 
     render(){
-        console.log(this.state.data)
-        console.log(this.state.events)
-        const events = this.state.events
-        const data = this.state.data
-        //const image = data.Profile_photo
-        //const image_Name = image.split(/[/://]+/)
-        //const imageDirectory = "/media/profile/" + image_Name[5];
+        if (this.state.isLoading) {
+            return("Loading...");
+        }
+        else {
+            console.log(this.state.data)
+            console.log(this.state.events)
+            const events = this.state.events
 
-        return(
-        <div className="box">
-            <div className="box1">
-                <div className="user1">
-                    <div className="userB">
-                        <div className="d-flex flex-column align-items-center text-center">
-                            <img src={""} alt="Admin" className="rounded-circle" width="150"></img>
-                            <div className="mt-3">
-                            <h4>{data.name}</h4>
-                            <p>{data.profession}</p>
-                            {this.state.usertype == 'org' && <p>{data.Organization}</p>}
-                            {this.state.usertype == 'vol' && <p>{data.address}</p>}
+            const data = this.state.data
+            const photo = data.Profile_photo;
+            const image_Name = photo.split(/[/://]+/);
+            const imageDirectory = "/media/profile/" + image_Name[5];
+            console.log(imageDirectory)
+            //const image = data.Profile_photo
+            //const image_Name = image.split(/[/://]+/)
+            //const imageDirectory = "/media/profile/" + image_Name[5];
+
+            return(
+            <div className="box">
+                <div className="box1">
+                    <div className="user1">
+                        <div className="userB">
+                            <div className="d-flex flex-column align-items-center text-center">
+                                <img src={imageDirectory} alt="Admin" className="rounded-circle" width="150"></img>
+                                <div className="mt-3">
+                                <h4>{data.name}</h4>
+                                <p>{data.profession}</p>
+                                {this.state.usertype == 'org' && <p>{data.Organization}</p>}
+                                {this.state.usertype == 'vol' && <p>{data.address}</p>}
+                                </div>
+                            </div>
+                            <div className="bb">
+                                <Link to='/editprofile' className="but">Edit</Link>
                             </div>
                         </div>
-                        <div className="bb">
-                            <Link to='/editprofile' className="but">Edit</Link>
-                        </div>
                     </div>
+                
+
                 </div>
-            
-
-            </div>
-            <div className="box2">
-            <div className="user">
-                <div className="card-body">
-                    <div className="card">
-                        <div className="title">
-                            <h5>Full Name</h5>
-                        </div>
-                        <div className="inf">
-                            {data.name}
-                        </div>
-                    </div>
-
-                    <hr />
-                    <div className="card">
-                        <div className="title">
-                            <h5>Age</h5>
-                        </div>
-                        <div className="inf">
-                            {data.age}
-                        </div>
-                    </div>
-                    <hr />
-                    <div className="card">
-                        <div className="title">
-                            <h5>Email</h5>
-                        </div>
-                        <div className="inf">
-                            {data.email}
-                        </div>
-                    </div>
-                    <hr />
-                    <div className="card">
-                        <div className="title">
-                            <h5>Phone</h5>
-                        </div>
-                        <div className="inf">
-                            {data.contact}
-                        </div>
-                    </div>
-                    <hr />
-                   
-                </div>
-            </div>
-            
-            <div className="user">
-                <div className="card-body">
-                    <div className="fav">
-                        {this.state.usertype == 'org' && <h4>Events I'm Managing</h4>}
-                        {this.state.usertype == 'vol' && <h4>Events I'm Participating In</h4>}
-                        {events.map((event) => (
-
-                            <div id = "eventCard">
-                                <h5> <strong>Event:</strong> {event.title} </h5>
-                                <h5> <strong>Current Roster:</strong> {event.roster.join(", ")} </h5>
-                                <h5> <strong>Remaining Slots:</strong> {event.slots} </h5>
-                                <span className="loc">Location: {event.location}</span>
-                                <hr />
+                <div className="box2">
+                <div className="user">
+                    <div className="card-body">
+                        <div className="card">
+                            <div className="title">
+                                <h5>Full Name</h5>
                             </div>
+                            <div className="inf">
+                                {data.name}
+                            </div>
+                        </div>
 
-                        ))}
+                        <hr />
+                        <div className="card">
+                            <div className="title">
+                                <h5>Age</h5>
+                            </div>
+                            <div className="inf">
+                                {data.age}
+                            </div>
+                        </div>
+                        <hr />
+                        <div className="card">
+                            <div className="title">
+                                <h5>Email</h5>
+                            </div>
+                            <div className="inf">
+                                {data.email}
+                            </div>
+                        </div>
+                        <hr />
+                        <div className="card">
+                            <div className="title">
+                                <h5>Phone</h5>
+                            </div>
+                            <div className="inf">
+                                {data.contact}
+                            </div>
+                        </div>
+                        <hr />
+                       
+                    </div>
+                </div>
+                
+                <div className="user">
+                    <div className="card-body">
+                        <div className="fav">
+                            {this.state.usertype == 'org' && <h4>Events I'm Managing</h4>}
+                            {this.state.usertype == 'vol' && <h4>Events I'm Participating In</h4>}
+                            {events.map((event) => (
+
+                                <div id = "eventCard">
+                                    <h5> <strong>Event:</strong> {event.title} </h5>
+                                    <h5> <strong>Current Roster:</strong> {event.roster.join(", ")} </h5>
+                                    <h5> <strong>Remaining Slots:</strong> {event.slots} </h5>
+                                    <span className="loc">Location: {event.location}</span>
+                                    <hr />
+                                </div>
+
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
-        )}
+            </div>
+            )}
+        }
 
 }
 

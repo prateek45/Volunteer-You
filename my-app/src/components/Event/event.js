@@ -55,6 +55,7 @@ export default function Event() {
         const description = event.description;
         const slots = event.slots;
         const image_Name = photo.split(/[/://]+/);
+        console.log(image_Name);
         const imageDirectory = "/media/profile/" + image_Name[5];
         return(
             <div className="e">
