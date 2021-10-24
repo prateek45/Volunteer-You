@@ -63,7 +63,8 @@ export class Profile extends React.Component{
                 for (let i = 0; i < data.count; i++) {
                     if (data.results[i].id == userID) {
                         this.setState({
-                            data: data.results[i]
+                            data: data.results[i],
+                            isLoading: false
                         })
                     }
                 }
@@ -78,8 +79,7 @@ export class Profile extends React.Component{
                     if (data.results[i].organization == userID) {
                         events.push(data.results[i])
                         this.setState({
-                            events: events,
-                            isLoading: false
+                            events: events
                         })    
                     }
                 }
@@ -102,6 +102,7 @@ export class Profile extends React.Component{
             const data = this.state.data
             console.log(data);
             const photo = data.Profile_photo;
+            console.log(photo);
             var imageDirectory = '';
             if (photo == null) {
                 imageDirectory = "/media/profile/default.png"

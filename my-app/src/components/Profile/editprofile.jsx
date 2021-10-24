@@ -117,12 +117,15 @@ export class EditProfile extends React.Component{
         }
         else {
             const photo = this.state.Profile_photo;
+            console.log(photo);
             var imageDirectory = '';
             if (photo == null) {
                 imageDirectory = "/media/profile/default.png"
             } else {
                 const image_Name = photo.split(/[/://]+/);
-                const imageDirectory = "/media/profile/" + image_Name[5];
+                console.log(image_Name)
+                imageDirectory = "/media/profile/" + image_Name[5];
+                console.log(imageDirectory)
             }
             return(
             <div className="box">
@@ -135,7 +138,7 @@ export class EditProfile extends React.Component{
                                         <div className="card">
                                             <div id = 'ImageContainer'>
                                                 <h4> Profile Image </h4>
-                                                <img  className="Image" name = "Profile_photo" src = {imageDirectory} alt = {"profile_image"} onChange = {this.handleChange}></img>
+                                                <img src={imageDirectory} alt="Admin" className="rounded-circle" width="150"></img>
                                             </div>
                                             <input
                                                 type="file"
