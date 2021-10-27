@@ -21,6 +21,10 @@ class VolunteerSignUp extends Component {
   }
 
   handleChange(event) {
+    /**
+     * Handle any changes in the forms fields and
+     * updates the state variables accordingly
+     */
     let target = event.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
     let name = target.name;
@@ -31,6 +35,9 @@ class VolunteerSignUp extends Component {
   }
 
   handleSubmit(event) {
+    /**
+     * On submit checks if the all the req fields are correctly filled
+     */
     event.preventDefault();
     console.log("The form was submitted with the following data:");
     console.log(this.state);

@@ -2,6 +2,7 @@ import { FaBars } from 'react-icons/fa';
 import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+//The Nav Bar itself
 export const Nav = styled.nav`
   background: #E6E6E6;
   height: 80px;
@@ -13,6 +14,7 @@ export const Nav = styled.nav`
   /* justify-content: flex-start; */
 `;
 
+//The links to other pages
 export const NavLink = styled(Link)`
   color: #000;
   display: flex;
@@ -66,6 +68,7 @@ export const NavBtn = styled.nav`
   }
 `;
 
+//The styling for the nuttons on the navbar
 export const NavBtnLink = styled(Link)`
   border-radius: 4px;
   background: #f69392;

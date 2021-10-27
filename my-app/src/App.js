@@ -14,7 +14,9 @@ import event from './components/Event/event';
 import {addEvent} from './components/Event/addEvent';
 import { Profile, EditProfile } from "./components/Profile/index";
 function App() {
-
+/**
+ * Main app that connects to other pages endpoints
+ */
   return (
     <><Router>
       <Navbar />

@@ -20,6 +20,10 @@ class OrganisationSignUp extends Component {
   }
 
   handleChange(event) {
+    /**
+     * Handle any changes in the forms fields and
+     * updates the state variables accordingly
+     */
     let target = event.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
     let name = target.name;
@@ -31,7 +35,9 @@ class OrganisationSignUp extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
+    /**
+     * On submit checks if the all the req fields are correctly filled
+     */
     console.log("The form was submitted with the following data:");
     console.log(this.state);
     const subUsername = this.state.username;
