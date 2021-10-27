@@ -56,6 +56,10 @@ export class EditProfile extends React.Component{
     }
 
     handleChange(event) {
+        /**
+         * Handle any changes in the forms fields and
+         * updates the state variables accordingly
+         */
         console.log(event);
         let target = event.target;
         let value;
@@ -72,6 +76,9 @@ export class EditProfile extends React.Component{
       }
 
     handleEdit(e) {
+        /**
+         * On submit of the edited fields, it post a PUT request to Users profile.
+         */
         e.preventDefault();
         console.log(this.state);
         
@@ -122,7 +129,7 @@ export class EditProfile extends React.Component{
                 imageDirectory = "/media/profile/default.png"
             } else {
                 const image_Name = photo.split(/[/://]+/);
-                const imageDirectory = "/media/profile/" + image_Name[5];
+                imageDirectory = "/media/profile/" + image_Name[5];
             }
             return(
             <div className="box">

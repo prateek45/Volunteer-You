@@ -3,6 +3,11 @@ from Volunteer.models import Volunteer, Organization_Official, Events
 
 
 class VolunteerSerializer(serializers.ModelSerializer):
+    """Serializer for Volunteer Models
+
+    Args:
+        serializers ([ModelSerializer]): Creates serializers that deal with model instances and querysets
+    """
     def __init__(self, *args, **kwargs):
         super(VolunteerSerializer, self).__init__(*args, **kwargs)
         if self.context['request'].method == "PUT":
@@ -13,6 +18,11 @@ class VolunteerSerializer(serializers.ModelSerializer):
         fields = ('id', 'Volunteer_user', 'name', 'age', 'profession', 'email', 'Profile_photo', 'address', 'password', 'contact')
         
 class OrganizationSerializer(serializers.ModelSerializer):
+    """Serializer for Organization Models
+
+    Args:
+        serializers ([ModelSerializer]): Creates serializers that deal with model instances and querysets
+    """
     def __init__(self, *args, **kwargs):
         super(OrganizationSerializer, self).__init__(*args, **kwargs)
         if self.context['request'].method == "PUT":
@@ -25,6 +35,11 @@ class OrganizationSerializer(serializers.ModelSerializer):
         fields = ('id', 'Organization_user', 'name', 'profession', 'Organization', 'email', 'Profile_photo', 'password', 'age', 'contact')
         
 class RosterSerializer(serializers.StringRelatedField):
+    """Serializer to handle Rosters
+
+    Args:
+        serializers ([ModelSerializer]): Creates serializers that deal with model instances and querysets
+    """
     def to_internal_value(self, value):
         return value
     class Meta:
@@ -32,6 +47,11 @@ class RosterSerializer(serializers.StringRelatedField):
         fields = ('id',)
 
 class EventsSerializer(serializers.ModelSerializer):
+    """Serializer for Events Models
+
+    Args:
+        serializers ([ModelSerializer]): Creates serializers that deal with model instances and querysets
+    """
     def __init__(self, *args, **kwargs):
         super(EventsSerializer, self).__init__(*args, **kwargs)
         if self.context['request'].method == "PUT":

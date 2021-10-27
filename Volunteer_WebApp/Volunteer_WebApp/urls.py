@@ -20,6 +20,9 @@ from django.urls.conf import include
 from django.conf import settings
 from django.conf.urls.static import static
 
+"""
+Url Patterns that connecct host to Volunteer App URLs
+"""
 
 urlpatterns = [
     path(r'', include('Volunteer.urls')),

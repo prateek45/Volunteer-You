@@ -19,7 +19,7 @@ export default function Event() {
         setEvent(results.filter(event => event.id == eventID)[0]);
         setLoading(false);     
     })  
-    }, []);
+    }, [eventID]);
     console.log(event);
 
     function volApply(e) {
