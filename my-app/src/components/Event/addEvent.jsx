@@ -101,6 +101,7 @@ export class addEvent extends React.Component  {
       const location = this.state.location;
       const contact = this.state.contact;
       const image = this.state.image;
+      //If any of the field is not added, the alert is displayed
       if (!image || !title || !numVol || !descr || !location || !contact) {
         alert('Please Fill the required fields with *');
       }
@@ -113,6 +114,7 @@ export class addEvent extends React.Component  {
       console.log(contact)
       console.log(image)
 
+      //To add the new event data into the databse 
       let formData = new FormData();
       formData.append('title', title);
       formData.append('slug', numVol);
@@ -136,6 +138,7 @@ export class addEvent extends React.Component  {
     }
 
   render(){
+    //To display the form on the page
     return (
       <div>
         <meta charSet="utf-8" />

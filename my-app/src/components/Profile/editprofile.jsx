@@ -218,21 +218,3 @@ export class EditProfile extends React.Component{
         }
 
 }
-
-/*<ul>
-          {cards.map((event) => (
-            <li key = {event.id} style = {{
-              listStyleType: 'none'
-              }} >
-                
-              <EventCard 
-            additional={event.additional}
-            title={event.title}
-            description={event.description} 
-            slots={event.slots}
-            contact={event.contact}
-            location={event.location}
-            id={event.id}/>
-            </li>
-          ))}    
-        </ul>*/

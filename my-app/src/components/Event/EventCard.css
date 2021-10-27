@@ -5,7 +5,7 @@
     margin: 50px;
     background-color: #c6906b;
 } 
-
+/* For the Apply button*/
 .apply{
     color: white;
     background-color: #f69392;
@@ -16,7 +16,7 @@
     text-decoration: none;
     display: inline-block;
 }
-
+/*When Pointer is hovered over the apply button*/
 .apply:hover{
     color: black;
     background-color: white;

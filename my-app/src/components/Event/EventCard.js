@@ -13,8 +13,10 @@ export default function EventCard(
         id,   
   }
 ) {    
+    //To add the image to each card
     const image_Name = image.split(/[/://]+/);
     const imageDirectory = "/media/profile/" + image_Name[5];
+    //To display the information in the card
     return (
     <div className="eventwrapper">
         <h2 className='title'>{title}</h2>
