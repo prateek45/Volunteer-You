@@ -1,36 +1,58 @@
 from django.db import models
+from django.core.validators import MinValueValidator
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+from django.utils.translation import gettext_lazy
 
-# Create your models here.
-from django.db import models
-from django.core.validators import MinValueValidator,MaxValueValidator
-from django.contrib.auth.models import User
+def upload_to(instance, filename):
+  return 'profile/{filename}'.format(filename = filename)
 
+class User(AbstractUser):
+  #Boolean fields to select the type of account.
+  is_volunteer = models.BooleanField(default=False)
+  is_organization = models.BooleanField(default=False)
 
-profession = [
-        ("Volunteer","Volunteer"),
-        ("Organization","Organization"),
-    ]
     
 # Create your models here.
+
 class Volunteer(models.Model):
-    user = models.OneToOneField(User, null= False, blank = False, on_delete= models.CASCADE)
+    Volunteer_user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name= 'volunteer', null= True, blank = True, on_delete= models.CASCADE)
     name = models.CharField(max_length=500,null = False)
     age =  models.PositiveIntegerField(default=10,validators=[MinValueValidator(5)], null=False)
-    profession = models.CharField(max_length=500, choices=profession ,default="Volunteer", null=False)
+    profession = models.CharField(max_length=500, default="Volunteer", null=False)
     email = models.EmailField(unique=True,null=False)
-    Profile_photo = models.ImageField(default = "", null = True, blank = True)
-    address = models.CharField(max_length=500,null = False)
-    
+    Profile_photo = models.ImageField(gettext_lazy("Image"), upload_to = upload_to, default = 'profile/avatar.jpg')
+    address = models.CharField(max_length=500,null = False, default="Test")
+    password = models.CharField(max_length=500,null = False)
+    contact = models.CharField(max_length=1000,null = False, blank= False, default="0000000000")
+
     def __str__(self):
 	    return self.name
 
 class Organization_Official(models.Model):
-    user = models.OneToOneField(User, null= False, blank = False, on_delete= models.CASCADE)
+    Organization_user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name= 'Organization_Official', null= True, blank = True, on_delete= models.CASCADE)
     name = models.CharField(max_length=200,null = False)
-    profession = models.CharField(max_length=500, choices=profession ,default="Organization Official", null=False)
+    age =  models.PositiveIntegerField(default=18,validators=[MinValueValidator(5)], null=False)
+    profession = models.CharField(max_length=500, default="Organization Official", null=False)
     Organization = models.CharField(max_length=200,null = False)
     email = models.EmailField(unique=True,null=False)
-    Profile_photo = models.ImageField(default = "", null = True, blank = True)
-    
+    Profile_photo = models.ImageField(gettext_lazy("Image"),upload_to = upload_to, default = 'profile/avatar.jpg')
+    password = models.CharField(max_length=500,null = False)
+    contact = models.CharField(max_length=1000,null = False, blank= False,default="0000000000")
+
     def __str__(self):
 	    return self.name
+
+class Events(models.Model):
+    organization = models.ForeignKey(Organization_Official,related_name = 'event',null=True, blank= False, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200,null = False)
+    photo = models.ImageField(gettext_lazy("Image"),default = "profile/unnamed.png",upload_to = upload_to)
+    description = models.CharField(max_length=10000,null = False, blank= False)
+    slots = models.PositiveIntegerField(default=10,validators=[MinValueValidator(1)], null=False)
+    contact = models.CharField(max_length=1000,null = False, blank= False, default= "0000000000")
+    location = models.CharField(max_length=10000,null = False, blank= False)
+    roster = models.ManyToManyField(Volunteer, null= True, related_name='events')
+    date_created = models.DateTimeField(auto_now_add=True, null=False, blank="False")
+    
+    def __str__(self):
+        return self.title

@@ -1,0 +1,6 @@
+React app may require npm installation of following packages:
+react-router-dom
+react-icons
+styled-components
+axios
+antd
